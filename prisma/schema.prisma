@@ -7,18 +7,66 @@ datasource db {
   provider = "mysql"
 }
 
-model User { 
-  id    Int     @id @default(autoincrement()) 
-  email String  @unique
-  name  String?
-  posts Post[]
-} 
+enum Role {
+  ADMIN
+  GERENTE
+  ATENDENTE
+  CLIENTE
+}
 
-model Post { 
-  id        Int     @id @default(autoincrement()) 
-  title     String
-  content   String? @db.Text
-  published Boolean @default(false) 
-  author    User    @relation(fields: [authorId], references: [id]) 
-  authorId  Int
-} 
+enum CanalPedido {
+  APP
+  TOTEM
+  BALCAO
+  PICKUP
+  WEB
+}
+
+model Usuario {
+  id         Int         @id @default(autoincrement())
+  nome       String
+  email      String      @unique
+  senha      String
+  role       Role        @default(CLIENTE)
+  pedidos    Pedido[]
+  fidelidade Fidelidade?
+}
+
+model Unidade {
+  id       Int       @id @default(autoincrement())
+  nome     String
+  produtos Produto[]
+}
+
+model Produto {
+  id        Int     @id @default(autoincrement())
+  nome      String
+  preco     Float
+  estoque   Int
+  unidadeId Int
+  unidade   Unidade @relation(fields: [unidadeId], references: [id])
+}
+
+model Pedido {
+  id          Int     @id @default(autoincrement())
+  canalPedido CanalPedido
+  clienteId   Int
+  status      String
+  itens       Item[]
+  usuario     Usuario @relation(fields: [clienteId], references: [id])
+}
+
+model Item {
+  id         Int    @id @default(autoincrement())
+  pedidoId   Int
+  produtoId  Int
+  quantidade Int
+  pedido     Pedido @relation(fields: [pedidoId], references: [id])
+}
+
+model Fidelidade {
+  id        Int     @id @default(autoincrement())
+  clienteId Int     @unique
+  pontos    Int     @default(0)
+  usuario   Usuario @relation(fields: [clienteId], references: [id])
+}

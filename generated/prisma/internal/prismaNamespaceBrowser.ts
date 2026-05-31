@@ -51,8 +51,12 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User',
-  Post: 'Post'
+  Usuario: 'Usuario',
+  Unidade: 'Unidade',
+  Produto: 'Produto',
+  Pedido: 'Pedido',
+  Item: 'Item',
+  Fidelidade: 'Fidelidade'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -71,24 +75,63 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const UserScalarFieldEnum = {
+export const UsuarioScalarFieldEnum = {
   id: 'id',
+  nome: 'nome',
   email: 'email',
-  name: 'name'
+  senha: 'senha',
+  role: 'role'
 } as const
 
-export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
 
 
-export const PostScalarFieldEnum = {
+export const UnidadeScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  content: 'content',
-  published: 'published',
-  authorId: 'authorId'
+  nome: 'nome'
 } as const
 
-export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+export type UnidadeScalarFieldEnum = (typeof UnidadeScalarFieldEnum)[keyof typeof UnidadeScalarFieldEnum]
+
+
+export const ProdutoScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  preco: 'preco',
+  estoque: 'estoque',
+  unidadeId: 'unidadeId'
+} as const
+
+export type ProdutoScalarFieldEnum = (typeof ProdutoScalarFieldEnum)[keyof typeof ProdutoScalarFieldEnum]
+
+
+export const PedidoScalarFieldEnum = {
+  id: 'id',
+  canalPedido: 'canalPedido',
+  clienteId: 'clienteId',
+  status: 'status'
+} as const
+
+export type PedidoScalarFieldEnum = (typeof PedidoScalarFieldEnum)[keyof typeof PedidoScalarFieldEnum]
+
+
+export const ItemScalarFieldEnum = {
+  id: 'id',
+  pedidoId: 'pedidoId',
+  produtoId: 'produtoId',
+  quantidade: 'quantidade'
+} as const
+
+export type ItemScalarFieldEnum = (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum]
+
+
+export const FidelidadeScalarFieldEnum = {
+  id: 'id',
+  clienteId: 'clienteId',
+  pontos: 'pontos'
+} as const
+
+export type FidelidadeScalarFieldEnum = (typeof FidelidadeScalarFieldEnum)[keyof typeof FidelidadeScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -99,26 +142,32 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-export const UserOrderByRelevanceFieldEnum = {
+export const UsuarioOrderByRelevanceFieldEnum = {
+  nome: 'nome',
   email: 'email',
-  name: 'name'
+  senha: 'senha'
 } as const
 
-export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+export type UsuarioOrderByRelevanceFieldEnum = (typeof UsuarioOrderByRelevanceFieldEnum)[keyof typeof UsuarioOrderByRelevanceFieldEnum]
 
 
-export const PostOrderByRelevanceFieldEnum = {
-  title: 'title',
-  content: 'content'
+export const UnidadeOrderByRelevanceFieldEnum = {
+  nome: 'nome'
 } as const
 
-export type PostOrderByRelevanceFieldEnum = (typeof PostOrderByRelevanceFieldEnum)[keyof typeof PostOrderByRelevanceFieldEnum]
+export type UnidadeOrderByRelevanceFieldEnum = (typeof UnidadeOrderByRelevanceFieldEnum)[keyof typeof UnidadeOrderByRelevanceFieldEnum]
+
+
+export const ProdutoOrderByRelevanceFieldEnum = {
+  nome: 'nome'
+} as const
+
+export type ProdutoOrderByRelevanceFieldEnum = (typeof ProdutoOrderByRelevanceFieldEnum)[keyof typeof ProdutoOrderByRelevanceFieldEnum]
+
+
+export const PedidoOrderByRelevanceFieldEnum = {
+  status: 'status'
+} as const
+
+export type PedidoOrderByRelevanceFieldEnum = (typeof PedidoOrderByRelevanceFieldEnum)[keyof typeof PedidoOrderByRelevanceFieldEnum]
 
