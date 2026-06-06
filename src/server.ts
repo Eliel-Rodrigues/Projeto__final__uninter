@@ -1,13 +1,14 @@
+import dotenv from "dotenv";
 import express from "express";
 import helmet from "helmet";
 import mainRouter from "./routers/main.js";
 
-
+dotenv.config();
 const server = express();
 
 server.use(helmet());
 server.use(express.json());
-server.use(express.urlencoded({extended: true}))
+server.use(express.urlencoded({ extended: true }))
 
 server.use("/", mainRouter);
 

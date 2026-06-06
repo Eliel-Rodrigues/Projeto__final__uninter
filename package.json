@@ -8,6 +8,7 @@
     "@prisma/adapter-mariadb": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "accepts": "^2.0.0",
+    "bcryptjs": "^3.0.3",
     "body-parser": "^2.2.2",
     "bytes": "^3.1.2",
     "c12": "^3.1.0",
@@ -27,7 +28,7 @@
     "denque": "^2.1.0",
     "depd": "^2.0.0",
     "destr": "^2.0.5",
-    "dotenv": "^17.4.2",
+    "dotenv-safe": "^9.1.0",
     "dunder-proto": "^1.0.1",
     "ee-first": "^1.1.1",
     "effect": "^3.21.0",
@@ -106,17 +107,20 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.9.1",
     "bcrypt": "^6.0.0",
+    "dotenv": "^17.4.2",
     "jsonwebtoken": "^9.0.3",
     "prisma": "^7.8.0",
+    "ts-node": "^10.9.2",
     "tsx": "^4.22.3",
     "typescript": "^6.0.3"
   },
   "scripts": {
-    "dev": "node --import=tsx --watch ./src/server.ts"
+    "dev": "node --env-file=.env --import=tsx --watch ./src/server.ts"
   },
   "repository": {
     "type": "git",
