@@ -1,14 +1,14 @@
 import express from "express";
+import { confimacaoPagamento, pagamentoMock } from "../services/pagamento.js";
 
 const pagamentoRouter = express.Router();
 
 pagamentoRouter.post("/mock", async (req, res) => {
-  const aprovado = Math.random() > 0.3;
-  res.json({ status: aprovado ? "APROVADO" : "NEGADO" });
+  pagamentoMock(req, res);
 });
 
 pagamentoRouter.post("/confirmacao", async (req, res) => {
-  res.json({ mensagem: "Pagamento confirmado (simulado)" });
+  confimacaoPagamento(req, res);
 });
 
 export default pagamentoRouter;

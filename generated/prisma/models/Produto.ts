@@ -228,6 +228,7 @@ export type ProdutoWhereInput = {
   preco?: Prisma.FloatFilter<"Produto"> | number
   estoque?: Prisma.IntFilter<"Produto"> | number
   unidadeId?: Prisma.IntFilter<"Produto"> | number
+  itens?: Prisma.ItemListRelationFilter
   unidade?: Prisma.XOR<Prisma.UnidadeScalarRelationFilter, Prisma.UnidadeWhereInput>
 }
 
@@ -237,6 +238,7 @@ export type ProdutoOrderByWithRelationInput = {
   preco?: Prisma.SortOrder
   estoque?: Prisma.SortOrder
   unidadeId?: Prisma.SortOrder
+  itens?: Prisma.ItemOrderByRelationAggregateInput
   unidade?: Prisma.UnidadeOrderByWithRelationInput
   _relevance?: Prisma.ProdutoOrderByRelevanceInput
 }
@@ -250,6 +252,7 @@ export type ProdutoWhereUniqueInput = Prisma.AtLeast<{
   preco?: Prisma.FloatFilter<"Produto"> | number
   estoque?: Prisma.IntFilter<"Produto"> | number
   unidadeId?: Prisma.IntFilter<"Produto"> | number
+  itens?: Prisma.ItemListRelationFilter
   unidade?: Prisma.XOR<Prisma.UnidadeScalarRelationFilter, Prisma.UnidadeWhereInput>
 }, "id">
 
@@ -281,6 +284,7 @@ export type ProdutoCreateInput = {
   nome: string
   preco: number
   estoque: number
+  itens?: Prisma.ItemCreateNestedManyWithoutProdutoInput
   unidade: Prisma.UnidadeCreateNestedOneWithoutProdutosInput
 }
 
@@ -290,12 +294,14 @@ export type ProdutoUncheckedCreateInput = {
   preco: number
   estoque: number
   unidadeId: number
+  itens?: Prisma.ItemUncheckedCreateNestedManyWithoutProdutoInput
 }
 
 export type ProdutoUpdateInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   preco?: Prisma.FloatFieldUpdateOperationsInput | number
   estoque?: Prisma.IntFieldUpdateOperationsInput | number
+  itens?: Prisma.ItemUpdateManyWithoutProdutoNestedInput
   unidade?: Prisma.UnidadeUpdateOneRequiredWithoutProdutosNestedInput
 }
 
@@ -305,6 +311,7 @@ export type ProdutoUncheckedUpdateInput = {
   preco?: Prisma.FloatFieldUpdateOperationsInput | number
   estoque?: Prisma.IntFieldUpdateOperationsInput | number
   unidadeId?: Prisma.IntFieldUpdateOperationsInput | number
+  itens?: Prisma.ItemUncheckedUpdateManyWithoutProdutoNestedInput
 }
 
 export type ProdutoCreateManyInput = {
@@ -383,6 +390,11 @@ export type ProdutoSumOrderByAggregateInput = {
   unidadeId?: Prisma.SortOrder
 }
 
+export type ProdutoScalarRelationFilter = {
+  is?: Prisma.ProdutoWhereInput
+  isNot?: Prisma.ProdutoWhereInput
+}
+
 export type ProdutoCreateNestedManyWithoutUnidadeInput = {
   create?: Prisma.XOR<Prisma.ProdutoCreateWithoutUnidadeInput, Prisma.ProdutoUncheckedCreateWithoutUnidadeInput> | Prisma.ProdutoCreateWithoutUnidadeInput[] | Prisma.ProdutoUncheckedCreateWithoutUnidadeInput[]
   connectOrCreate?: Prisma.ProdutoCreateOrConnectWithoutUnidadeInput | Prisma.ProdutoCreateOrConnectWithoutUnidadeInput[]
@@ -433,10 +445,25 @@ export type FloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type ProdutoCreateNestedOneWithoutItensInput = {
+  create?: Prisma.XOR<Prisma.ProdutoCreateWithoutItensInput, Prisma.ProdutoUncheckedCreateWithoutItensInput>
+  connectOrCreate?: Prisma.ProdutoCreateOrConnectWithoutItensInput
+  connect?: Prisma.ProdutoWhereUniqueInput
+}
+
+export type ProdutoUpdateOneRequiredWithoutItensNestedInput = {
+  create?: Prisma.XOR<Prisma.ProdutoCreateWithoutItensInput, Prisma.ProdutoUncheckedCreateWithoutItensInput>
+  connectOrCreate?: Prisma.ProdutoCreateOrConnectWithoutItensInput
+  upsert?: Prisma.ProdutoUpsertWithoutItensInput
+  connect?: Prisma.ProdutoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProdutoUpdateToOneWithWhereWithoutItensInput, Prisma.ProdutoUpdateWithoutItensInput>, Prisma.ProdutoUncheckedUpdateWithoutItensInput>
+}
+
 export type ProdutoCreateWithoutUnidadeInput = {
   nome: string
   preco: number
   estoque: number
+  itens?: Prisma.ItemCreateNestedManyWithoutProdutoInput
 }
 
 export type ProdutoUncheckedCreateWithoutUnidadeInput = {
@@ -444,6 +471,7 @@ export type ProdutoUncheckedCreateWithoutUnidadeInput = {
   nome: string
   preco: number
   estoque: number
+  itens?: Prisma.ItemUncheckedCreateNestedManyWithoutProdutoInput
 }
 
 export type ProdutoCreateOrConnectWithoutUnidadeInput = {
@@ -483,6 +511,52 @@ export type ProdutoScalarWhereInput = {
   unidadeId?: Prisma.IntFilter<"Produto"> | number
 }
 
+export type ProdutoCreateWithoutItensInput = {
+  nome: string
+  preco: number
+  estoque: number
+  unidade: Prisma.UnidadeCreateNestedOneWithoutProdutosInput
+}
+
+export type ProdutoUncheckedCreateWithoutItensInput = {
+  id?: number
+  nome: string
+  preco: number
+  estoque: number
+  unidadeId: number
+}
+
+export type ProdutoCreateOrConnectWithoutItensInput = {
+  where: Prisma.ProdutoWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProdutoCreateWithoutItensInput, Prisma.ProdutoUncheckedCreateWithoutItensInput>
+}
+
+export type ProdutoUpsertWithoutItensInput = {
+  update: Prisma.XOR<Prisma.ProdutoUpdateWithoutItensInput, Prisma.ProdutoUncheckedUpdateWithoutItensInput>
+  create: Prisma.XOR<Prisma.ProdutoCreateWithoutItensInput, Prisma.ProdutoUncheckedCreateWithoutItensInput>
+  where?: Prisma.ProdutoWhereInput
+}
+
+export type ProdutoUpdateToOneWithWhereWithoutItensInput = {
+  where?: Prisma.ProdutoWhereInput
+  data: Prisma.XOR<Prisma.ProdutoUpdateWithoutItensInput, Prisma.ProdutoUncheckedUpdateWithoutItensInput>
+}
+
+export type ProdutoUpdateWithoutItensInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  preco?: Prisma.FloatFieldUpdateOperationsInput | number
+  estoque?: Prisma.IntFieldUpdateOperationsInput | number
+  unidade?: Prisma.UnidadeUpdateOneRequiredWithoutProdutosNestedInput
+}
+
+export type ProdutoUncheckedUpdateWithoutItensInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  preco?: Prisma.FloatFieldUpdateOperationsInput | number
+  estoque?: Prisma.IntFieldUpdateOperationsInput | number
+  unidadeId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
 export type ProdutoCreateManyUnidadeInput = {
   id?: number
   nome: string
@@ -494,6 +568,7 @@ export type ProdutoUpdateWithoutUnidadeInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   preco?: Prisma.FloatFieldUpdateOperationsInput | number
   estoque?: Prisma.IntFieldUpdateOperationsInput | number
+  itens?: Prisma.ItemUpdateManyWithoutProdutoNestedInput
 }
 
 export type ProdutoUncheckedUpdateWithoutUnidadeInput = {
@@ -501,6 +576,7 @@ export type ProdutoUncheckedUpdateWithoutUnidadeInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   preco?: Prisma.FloatFieldUpdateOperationsInput | number
   estoque?: Prisma.IntFieldUpdateOperationsInput | number
+  itens?: Prisma.ItemUncheckedUpdateManyWithoutProdutoNestedInput
 }
 
 export type ProdutoUncheckedUpdateManyWithoutUnidadeInput = {
@@ -511,6 +587,35 @@ export type ProdutoUncheckedUpdateManyWithoutUnidadeInput = {
 }
 
 
+/**
+ * Count Type ProdutoCountOutputType
+ */
+
+export type ProdutoCountOutputType = {
+  itens: number
+}
+
+export type ProdutoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  itens?: boolean | ProdutoCountOutputTypeCountItensArgs
+}
+
+/**
+ * ProdutoCountOutputType without action
+ */
+export type ProdutoCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProdutoCountOutputType
+   */
+  select?: Prisma.ProdutoCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ProdutoCountOutputType without action
+ */
+export type ProdutoCountOutputTypeCountItensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ItemWhereInput
+}
+
 
 export type ProdutoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -518,7 +623,9 @@ export type ProdutoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   preco?: boolean
   estoque?: boolean
   unidadeId?: boolean
+  itens?: boolean | Prisma.Produto$itensArgs<ExtArgs>
   unidade?: boolean | Prisma.UnidadeDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.ProdutoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["produto"]>
 
 
@@ -533,12 +640,15 @@ export type ProdutoSelectScalar = {
 
 export type ProdutoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "preco" | "estoque" | "unidadeId", ExtArgs["result"]["produto"]>
 export type ProdutoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  itens?: boolean | Prisma.Produto$itensArgs<ExtArgs>
   unidade?: boolean | Prisma.UnidadeDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.ProdutoCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $ProdutoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Produto"
   objects: {
+    itens: Prisma.$ItemPayload<ExtArgs>[]
     unidade: Prisma.$UnidadePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -887,6 +997,7 @@ readonly fields: ProdutoFieldRefs;
  */
 export interface Prisma__ProdutoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  itens<T extends Prisma.Produto$itensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Produto$itensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   unidade<T extends Prisma.UnidadeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnidadeDefaultArgs<ExtArgs>>): Prisma.Prisma__UnidadeClient<runtime.Types.Result.GetResult<Prisma.$UnidadePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1267,6 +1378,30 @@ export type ProdutoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Produtos to delete.
    */
   limit?: number
+}
+
+/**
+ * Produto.itens
+ */
+export type Produto$itensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Item
+   */
+  select?: Prisma.ItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Item
+   */
+  omit?: Prisma.ItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ItemInclude<ExtArgs> | null
+  where?: Prisma.ItemWhereInput
+  orderBy?: Prisma.ItemOrderByWithRelationInput | Prisma.ItemOrderByWithRelationInput[]
+  cursor?: Prisma.ItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ItemScalarFieldEnum | Prisma.ItemScalarFieldEnum[]
 }
 
 /**

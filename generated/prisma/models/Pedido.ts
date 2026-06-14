@@ -29,11 +29,13 @@ export type AggregatePedido = {
 export type PedidoAvgAggregateOutputType = {
   id: number | null
   clienteId: number | null
+  valorTotal: number | null
 }
 
 export type PedidoSumAggregateOutputType = {
   id: number | null
   clienteId: number | null
+  valorTotal: number | null
 }
 
 export type PedidoMinAggregateOutputType = {
@@ -41,6 +43,7 @@ export type PedidoMinAggregateOutputType = {
   canalPedido: $Enums.CanalPedido | null
   clienteId: number | null
   status: string | null
+  valorTotal: number | null
 }
 
 export type PedidoMaxAggregateOutputType = {
@@ -48,6 +51,7 @@ export type PedidoMaxAggregateOutputType = {
   canalPedido: $Enums.CanalPedido | null
   clienteId: number | null
   status: string | null
+  valorTotal: number | null
 }
 
 export type PedidoCountAggregateOutputType = {
@@ -55,6 +59,7 @@ export type PedidoCountAggregateOutputType = {
   canalPedido: number
   clienteId: number
   status: number
+  valorTotal: number
   _all: number
 }
 
@@ -62,11 +67,13 @@ export type PedidoCountAggregateOutputType = {
 export type PedidoAvgAggregateInputType = {
   id?: true
   clienteId?: true
+  valorTotal?: true
 }
 
 export type PedidoSumAggregateInputType = {
   id?: true
   clienteId?: true
+  valorTotal?: true
 }
 
 export type PedidoMinAggregateInputType = {
@@ -74,6 +81,7 @@ export type PedidoMinAggregateInputType = {
   canalPedido?: true
   clienteId?: true
   status?: true
+  valorTotal?: true
 }
 
 export type PedidoMaxAggregateInputType = {
@@ -81,6 +89,7 @@ export type PedidoMaxAggregateInputType = {
   canalPedido?: true
   clienteId?: true
   status?: true
+  valorTotal?: true
 }
 
 export type PedidoCountAggregateInputType = {
@@ -88,6 +97,7 @@ export type PedidoCountAggregateInputType = {
   canalPedido?: true
   clienteId?: true
   status?: true
+  valorTotal?: true
   _all?: true
 }
 
@@ -182,6 +192,7 @@ export type PedidoGroupByOutputType = {
   canalPedido: $Enums.CanalPedido
   clienteId: number
   status: string
+  valorTotal: number
   _count: PedidoCountAggregateOutputType | null
   _avg: PedidoAvgAggregateOutputType | null
   _sum: PedidoSumAggregateOutputType | null
@@ -212,6 +223,7 @@ export type PedidoWhereInput = {
   canalPedido?: Prisma.EnumCanalPedidoFilter<"Pedido"> | $Enums.CanalPedido
   clienteId?: Prisma.IntFilter<"Pedido"> | number
   status?: Prisma.StringFilter<"Pedido"> | string
+  valorTotal?: Prisma.FloatFilter<"Pedido"> | number
   itens?: Prisma.ItemListRelationFilter
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
 }
@@ -221,6 +233,7 @@ export type PedidoOrderByWithRelationInput = {
   canalPedido?: Prisma.SortOrder
   clienteId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  valorTotal?: Prisma.SortOrder
   itens?: Prisma.ItemOrderByRelationAggregateInput
   usuario?: Prisma.UsuarioOrderByWithRelationInput
   _relevance?: Prisma.PedidoOrderByRelevanceInput
@@ -234,6 +247,7 @@ export type PedidoWhereUniqueInput = Prisma.AtLeast<{
   canalPedido?: Prisma.EnumCanalPedidoFilter<"Pedido"> | $Enums.CanalPedido
   clienteId?: Prisma.IntFilter<"Pedido"> | number
   status?: Prisma.StringFilter<"Pedido"> | string
+  valorTotal?: Prisma.FloatFilter<"Pedido"> | number
   itens?: Prisma.ItemListRelationFilter
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
 }, "id">
@@ -243,6 +257,7 @@ export type PedidoOrderByWithAggregationInput = {
   canalPedido?: Prisma.SortOrder
   clienteId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  valorTotal?: Prisma.SortOrder
   _count?: Prisma.PedidoCountOrderByAggregateInput
   _avg?: Prisma.PedidoAvgOrderByAggregateInput
   _max?: Prisma.PedidoMaxOrderByAggregateInput
@@ -258,11 +273,13 @@ export type PedidoScalarWhereWithAggregatesInput = {
   canalPedido?: Prisma.EnumCanalPedidoWithAggregatesFilter<"Pedido"> | $Enums.CanalPedido
   clienteId?: Prisma.IntWithAggregatesFilter<"Pedido"> | number
   status?: Prisma.StringWithAggregatesFilter<"Pedido"> | string
+  valorTotal?: Prisma.FloatWithAggregatesFilter<"Pedido"> | number
 }
 
 export type PedidoCreateInput = {
   canalPedido: $Enums.CanalPedido
-  status: string
+  status?: string
+  valorTotal: number
   itens?: Prisma.ItemCreateNestedManyWithoutPedidoInput
   usuario: Prisma.UsuarioCreateNestedOneWithoutPedidosInput
 }
@@ -271,13 +288,15 @@ export type PedidoUncheckedCreateInput = {
   id?: number
   canalPedido: $Enums.CanalPedido
   clienteId: number
-  status: string
+  status?: string
+  valorTotal: number
   itens?: Prisma.ItemUncheckedCreateNestedManyWithoutPedidoInput
 }
 
 export type PedidoUpdateInput = {
   canalPedido?: Prisma.EnumCanalPedidoFieldUpdateOperationsInput | $Enums.CanalPedido
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   itens?: Prisma.ItemUpdateManyWithoutPedidoNestedInput
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutPedidosNestedInput
 }
@@ -287,6 +306,7 @@ export type PedidoUncheckedUpdateInput = {
   canalPedido?: Prisma.EnumCanalPedidoFieldUpdateOperationsInput | $Enums.CanalPedido
   clienteId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   itens?: Prisma.ItemUncheckedUpdateManyWithoutPedidoNestedInput
 }
 
@@ -294,12 +314,14 @@ export type PedidoCreateManyInput = {
   id?: number
   canalPedido: $Enums.CanalPedido
   clienteId: number
-  status: string
+  status?: string
+  valorTotal: number
 }
 
 export type PedidoUpdateManyMutationInput = {
   canalPedido?: Prisma.EnumCanalPedidoFieldUpdateOperationsInput | $Enums.CanalPedido
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type PedidoUncheckedUpdateManyInput = {
@@ -307,6 +329,7 @@ export type PedidoUncheckedUpdateManyInput = {
   canalPedido?: Prisma.EnumCanalPedidoFieldUpdateOperationsInput | $Enums.CanalPedido
   clienteId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type PedidoListRelationFilter = {
@@ -330,11 +353,13 @@ export type PedidoCountOrderByAggregateInput = {
   canalPedido?: Prisma.SortOrder
   clienteId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  valorTotal?: Prisma.SortOrder
 }
 
 export type PedidoAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   clienteId?: Prisma.SortOrder
+  valorTotal?: Prisma.SortOrder
 }
 
 export type PedidoMaxOrderByAggregateInput = {
@@ -342,6 +367,7 @@ export type PedidoMaxOrderByAggregateInput = {
   canalPedido?: Prisma.SortOrder
   clienteId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  valorTotal?: Prisma.SortOrder
 }
 
 export type PedidoMinOrderByAggregateInput = {
@@ -349,11 +375,13 @@ export type PedidoMinOrderByAggregateInput = {
   canalPedido?: Prisma.SortOrder
   clienteId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  valorTotal?: Prisma.SortOrder
 }
 
 export type PedidoSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   clienteId?: Prisma.SortOrder
+  valorTotal?: Prisma.SortOrder
 }
 
 export type PedidoScalarRelationFilter = {
@@ -423,14 +451,16 @@ export type PedidoUpdateOneRequiredWithoutItensNestedInput = {
 
 export type PedidoCreateWithoutUsuarioInput = {
   canalPedido: $Enums.CanalPedido
-  status: string
+  status?: string
+  valorTotal: number
   itens?: Prisma.ItemCreateNestedManyWithoutPedidoInput
 }
 
 export type PedidoUncheckedCreateWithoutUsuarioInput = {
   id?: number
   canalPedido: $Enums.CanalPedido
-  status: string
+  status?: string
+  valorTotal: number
   itens?: Prisma.ItemUncheckedCreateNestedManyWithoutPedidoInput
 }
 
@@ -468,11 +498,13 @@ export type PedidoScalarWhereInput = {
   canalPedido?: Prisma.EnumCanalPedidoFilter<"Pedido"> | $Enums.CanalPedido
   clienteId?: Prisma.IntFilter<"Pedido"> | number
   status?: Prisma.StringFilter<"Pedido"> | string
+  valorTotal?: Prisma.FloatFilter<"Pedido"> | number
 }
 
 export type PedidoCreateWithoutItensInput = {
   canalPedido: $Enums.CanalPedido
-  status: string
+  status?: string
+  valorTotal: number
   usuario: Prisma.UsuarioCreateNestedOneWithoutPedidosInput
 }
 
@@ -480,7 +512,8 @@ export type PedidoUncheckedCreateWithoutItensInput = {
   id?: number
   canalPedido: $Enums.CanalPedido
   clienteId: number
-  status: string
+  status?: string
+  valorTotal: number
 }
 
 export type PedidoCreateOrConnectWithoutItensInput = {
@@ -502,6 +535,7 @@ export type PedidoUpdateToOneWithWhereWithoutItensInput = {
 export type PedidoUpdateWithoutItensInput = {
   canalPedido?: Prisma.EnumCanalPedidoFieldUpdateOperationsInput | $Enums.CanalPedido
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutPedidosNestedInput
 }
 
@@ -510,17 +544,20 @@ export type PedidoUncheckedUpdateWithoutItensInput = {
   canalPedido?: Prisma.EnumCanalPedidoFieldUpdateOperationsInput | $Enums.CanalPedido
   clienteId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type PedidoCreateManyUsuarioInput = {
   id?: number
   canalPedido: $Enums.CanalPedido
-  status: string
+  status?: string
+  valorTotal: number
 }
 
 export type PedidoUpdateWithoutUsuarioInput = {
   canalPedido?: Prisma.EnumCanalPedidoFieldUpdateOperationsInput | $Enums.CanalPedido
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   itens?: Prisma.ItemUpdateManyWithoutPedidoNestedInput
 }
 
@@ -528,6 +565,7 @@ export type PedidoUncheckedUpdateWithoutUsuarioInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   canalPedido?: Prisma.EnumCanalPedidoFieldUpdateOperationsInput | $Enums.CanalPedido
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   itens?: Prisma.ItemUncheckedUpdateManyWithoutPedidoNestedInput
 }
 
@@ -535,6 +573,7 @@ export type PedidoUncheckedUpdateManyWithoutUsuarioInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   canalPedido?: Prisma.EnumCanalPedidoFieldUpdateOperationsInput | $Enums.CanalPedido
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 
@@ -573,6 +612,7 @@ export type PedidoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   canalPedido?: boolean
   clienteId?: boolean
   status?: boolean
+  valorTotal?: boolean
   itens?: boolean | Prisma.Pedido$itensArgs<ExtArgs>
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.PedidoCountOutputTypeDefaultArgs<ExtArgs>
@@ -585,9 +625,10 @@ export type PedidoSelectScalar = {
   canalPedido?: boolean
   clienteId?: boolean
   status?: boolean
+  valorTotal?: boolean
 }
 
-export type PedidoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "canalPedido" | "clienteId" | "status", ExtArgs["result"]["pedido"]>
+export type PedidoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "canalPedido" | "clienteId" | "status" | "valorTotal", ExtArgs["result"]["pedido"]>
 export type PedidoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   itens?: boolean | Prisma.Pedido$itensArgs<ExtArgs>
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
@@ -605,6 +646,7 @@ export type $PedidoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     canalPedido: $Enums.CanalPedido
     clienteId: number
     status: string
+    valorTotal: number
   }, ExtArgs["result"]["pedido"]>
   composites: {}
 }
@@ -980,6 +1022,7 @@ export interface PedidoFieldRefs {
   readonly canalPedido: Prisma.FieldRef<"Pedido", 'CanalPedido'>
   readonly clienteId: Prisma.FieldRef<"Pedido", 'Int'>
   readonly status: Prisma.FieldRef<"Pedido", 'String'>
+  readonly valorTotal: Prisma.FieldRef<"Pedido", 'Float'>
 }
     
 

@@ -13,6 +13,7 @@ mainRouter.use("/login", authRouter);
 mainRouter.use("/pedidos", pedidoRouter);
 mainRouter.use("/produtos", produtoRouter);
 mainRouter.use("/unidades", unidadeRouter);
+mainRouter.use("/pedidos", pedidoRouter);
 
 
 export default mainRouter;

@@ -1,34 +1,27 @@
 import express from "express";
-import { prisma } from "../libs/prisma.js";
+import { buscarPedidos, criarPedido, statusPedido } from "../services/pedidos.js";
 
 const pedidoRouter = express.Router();
 
 // Criar pedido
 pedidoRouter.post("/", async (req, res) => {
-  const { canalPedido, clienteId, itens } = req.body;
-  const pedido = await prisma.pedido.create({
-    data: {
-      canalPedido,
-      clienteId,
-      status: "PENDENTE",
-      itens: { create: itens }
-    },
-    include: { itens: true }
-  });
-  res.json(pedido);
+    const { clienteId, canal, itens } = req.body;
+    const pedido = await criarPedido(clienteId, canal, itens);
+    if (!pedido) {
+     return res.status(400).json({ message: "Nao foi possível criar esse pedido" });
+    }
+    return res.status(201).json(pedido);
 });
+  
 
+// Status do pedido
 pedidoRouter.put("/:id/status", async (req, res) => {
-  const pedido = await prisma.pedido.update({
-    where: { id: Number(req.params.id) },
-    data: { status: req.body.status }
-  });
-  res.json(pedido);
+  statusPedido(req, res);
 });
 
+// Buscar pedidos
 pedidoRouter.get("/", async (req, res) => {
-  const pedidos = await prisma.pedido.findMany({ include: { itens: true } });
-  res.json(pedidos);
+  buscarPedidos(req, res);
 });
 
 export default pedidoRouter;

@@ -221,6 +221,7 @@ export type ItemWhereInput = {
   produtoId?: Prisma.IntFilter<"Item"> | number
   quantidade?: Prisma.IntFilter<"Item"> | number
   pedido?: Prisma.XOR<Prisma.PedidoScalarRelationFilter, Prisma.PedidoWhereInput>
+  produto?: Prisma.XOR<Prisma.ProdutoScalarRelationFilter, Prisma.ProdutoWhereInput>
 }
 
 export type ItemOrderByWithRelationInput = {
@@ -229,6 +230,7 @@ export type ItemOrderByWithRelationInput = {
   produtoId?: Prisma.SortOrder
   quantidade?: Prisma.SortOrder
   pedido?: Prisma.PedidoOrderByWithRelationInput
+  produto?: Prisma.ProdutoOrderByWithRelationInput
 }
 
 export type ItemWhereUniqueInput = Prisma.AtLeast<{
@@ -240,6 +242,7 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<{
   produtoId?: Prisma.IntFilter<"Item"> | number
   quantidade?: Prisma.IntFilter<"Item"> | number
   pedido?: Prisma.XOR<Prisma.PedidoScalarRelationFilter, Prisma.PedidoWhereInput>
+  produto?: Prisma.XOR<Prisma.ProdutoScalarRelationFilter, Prisma.ProdutoWhereInput>
 }, "id">
 
 export type ItemOrderByWithAggregationInput = {
@@ -265,9 +268,9 @@ export type ItemScalarWhereWithAggregatesInput = {
 }
 
 export type ItemCreateInput = {
-  produtoId: number
   quantidade: number
   pedido: Prisma.PedidoCreateNestedOneWithoutItensInput
+  produto: Prisma.ProdutoCreateNestedOneWithoutItensInput
 }
 
 export type ItemUncheckedCreateInput = {
@@ -278,9 +281,9 @@ export type ItemUncheckedCreateInput = {
 }
 
 export type ItemUpdateInput = {
-  produtoId?: Prisma.IntFieldUpdateOperationsInput | number
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
   pedido?: Prisma.PedidoUpdateOneRequiredWithoutItensNestedInput
+  produto?: Prisma.ProdutoUpdateOneRequiredWithoutItensNestedInput
 }
 
 export type ItemUncheckedUpdateInput = {
@@ -298,7 +301,6 @@ export type ItemCreateManyInput = {
 }
 
 export type ItemUpdateManyMutationInput = {
-  produtoId?: Prisma.IntFieldUpdateOperationsInput | number
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -354,6 +356,48 @@ export type ItemSumOrderByAggregateInput = {
   quantidade?: Prisma.SortOrder
 }
 
+export type ItemCreateNestedManyWithoutProdutoInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutProdutoInput, Prisma.ItemUncheckedCreateWithoutProdutoInput> | Prisma.ItemCreateWithoutProdutoInput[] | Prisma.ItemUncheckedCreateWithoutProdutoInput[]
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutProdutoInput | Prisma.ItemCreateOrConnectWithoutProdutoInput[]
+  createMany?: Prisma.ItemCreateManyProdutoInputEnvelope
+  connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+}
+
+export type ItemUncheckedCreateNestedManyWithoutProdutoInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutProdutoInput, Prisma.ItemUncheckedCreateWithoutProdutoInput> | Prisma.ItemCreateWithoutProdutoInput[] | Prisma.ItemUncheckedCreateWithoutProdutoInput[]
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutProdutoInput | Prisma.ItemCreateOrConnectWithoutProdutoInput[]
+  createMany?: Prisma.ItemCreateManyProdutoInputEnvelope
+  connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+}
+
+export type ItemUpdateManyWithoutProdutoNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutProdutoInput, Prisma.ItemUncheckedCreateWithoutProdutoInput> | Prisma.ItemCreateWithoutProdutoInput[] | Prisma.ItemUncheckedCreateWithoutProdutoInput[]
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutProdutoInput | Prisma.ItemCreateOrConnectWithoutProdutoInput[]
+  upsert?: Prisma.ItemUpsertWithWhereUniqueWithoutProdutoInput | Prisma.ItemUpsertWithWhereUniqueWithoutProdutoInput[]
+  createMany?: Prisma.ItemCreateManyProdutoInputEnvelope
+  set?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  disconnect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  delete?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  update?: Prisma.ItemUpdateWithWhereUniqueWithoutProdutoInput | Prisma.ItemUpdateWithWhereUniqueWithoutProdutoInput[]
+  updateMany?: Prisma.ItemUpdateManyWithWhereWithoutProdutoInput | Prisma.ItemUpdateManyWithWhereWithoutProdutoInput[]
+  deleteMany?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[]
+}
+
+export type ItemUncheckedUpdateManyWithoutProdutoNestedInput = {
+  create?: Prisma.XOR<Prisma.ItemCreateWithoutProdutoInput, Prisma.ItemUncheckedCreateWithoutProdutoInput> | Prisma.ItemCreateWithoutProdutoInput[] | Prisma.ItemUncheckedCreateWithoutProdutoInput[]
+  connectOrCreate?: Prisma.ItemCreateOrConnectWithoutProdutoInput | Prisma.ItemCreateOrConnectWithoutProdutoInput[]
+  upsert?: Prisma.ItemUpsertWithWhereUniqueWithoutProdutoInput | Prisma.ItemUpsertWithWhereUniqueWithoutProdutoInput[]
+  createMany?: Prisma.ItemCreateManyProdutoInputEnvelope
+  set?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  disconnect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  delete?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  connect?: Prisma.ItemWhereUniqueInput | Prisma.ItemWhereUniqueInput[]
+  update?: Prisma.ItemUpdateWithWhereUniqueWithoutProdutoInput | Prisma.ItemUpdateWithWhereUniqueWithoutProdutoInput[]
+  updateMany?: Prisma.ItemUpdateManyWithWhereWithoutProdutoInput | Prisma.ItemUpdateManyWithWhereWithoutProdutoInput[]
+  deleteMany?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[]
+}
+
 export type ItemCreateNestedManyWithoutPedidoInput = {
   create?: Prisma.XOR<Prisma.ItemCreateWithoutPedidoInput, Prisma.ItemUncheckedCreateWithoutPedidoInput> | Prisma.ItemCreateWithoutPedidoInput[] | Prisma.ItemUncheckedCreateWithoutPedidoInput[]
   connectOrCreate?: Prisma.ItemCreateOrConnectWithoutPedidoInput | Prisma.ItemCreateOrConnectWithoutPedidoInput[]
@@ -396,9 +440,56 @@ export type ItemUncheckedUpdateManyWithoutPedidoNestedInput = {
   deleteMany?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[]
 }
 
-export type ItemCreateWithoutPedidoInput = {
-  produtoId: number
+export type ItemCreateWithoutProdutoInput = {
   quantidade: number
+  pedido: Prisma.PedidoCreateNestedOneWithoutItensInput
+}
+
+export type ItemUncheckedCreateWithoutProdutoInput = {
+  id?: number
+  pedidoId: number
+  quantidade: number
+}
+
+export type ItemCreateOrConnectWithoutProdutoInput = {
+  where: Prisma.ItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.ItemCreateWithoutProdutoInput, Prisma.ItemUncheckedCreateWithoutProdutoInput>
+}
+
+export type ItemCreateManyProdutoInputEnvelope = {
+  data: Prisma.ItemCreateManyProdutoInput | Prisma.ItemCreateManyProdutoInput[]
+  skipDuplicates?: boolean
+}
+
+export type ItemUpsertWithWhereUniqueWithoutProdutoInput = {
+  where: Prisma.ItemWhereUniqueInput
+  update: Prisma.XOR<Prisma.ItemUpdateWithoutProdutoInput, Prisma.ItemUncheckedUpdateWithoutProdutoInput>
+  create: Prisma.XOR<Prisma.ItemCreateWithoutProdutoInput, Prisma.ItemUncheckedCreateWithoutProdutoInput>
+}
+
+export type ItemUpdateWithWhereUniqueWithoutProdutoInput = {
+  where: Prisma.ItemWhereUniqueInput
+  data: Prisma.XOR<Prisma.ItemUpdateWithoutProdutoInput, Prisma.ItemUncheckedUpdateWithoutProdutoInput>
+}
+
+export type ItemUpdateManyWithWhereWithoutProdutoInput = {
+  where: Prisma.ItemScalarWhereInput
+  data: Prisma.XOR<Prisma.ItemUpdateManyMutationInput, Prisma.ItemUncheckedUpdateManyWithoutProdutoInput>
+}
+
+export type ItemScalarWhereInput = {
+  AND?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[]
+  OR?: Prisma.ItemScalarWhereInput[]
+  NOT?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[]
+  id?: Prisma.IntFilter<"Item"> | number
+  pedidoId?: Prisma.IntFilter<"Item"> | number
+  produtoId?: Prisma.IntFilter<"Item"> | number
+  quantidade?: Prisma.IntFilter<"Item"> | number
+}
+
+export type ItemCreateWithoutPedidoInput = {
+  quantidade: number
+  produto: Prisma.ProdutoCreateNestedOneWithoutItensInput
 }
 
 export type ItemUncheckedCreateWithoutPedidoInput = {
@@ -433,14 +524,27 @@ export type ItemUpdateManyWithWhereWithoutPedidoInput = {
   data: Prisma.XOR<Prisma.ItemUpdateManyMutationInput, Prisma.ItemUncheckedUpdateManyWithoutPedidoInput>
 }
 
-export type ItemScalarWhereInput = {
-  AND?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[]
-  OR?: Prisma.ItemScalarWhereInput[]
-  NOT?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[]
-  id?: Prisma.IntFilter<"Item"> | number
-  pedidoId?: Prisma.IntFilter<"Item"> | number
-  produtoId?: Prisma.IntFilter<"Item"> | number
-  quantidade?: Prisma.IntFilter<"Item"> | number
+export type ItemCreateManyProdutoInput = {
+  id?: number
+  pedidoId: number
+  quantidade: number
+}
+
+export type ItemUpdateWithoutProdutoInput = {
+  quantidade?: Prisma.IntFieldUpdateOperationsInput | number
+  pedido?: Prisma.PedidoUpdateOneRequiredWithoutItensNestedInput
+}
+
+export type ItemUncheckedUpdateWithoutProdutoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  pedidoId?: Prisma.IntFieldUpdateOperationsInput | number
+  quantidade?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type ItemUncheckedUpdateManyWithoutProdutoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  pedidoId?: Prisma.IntFieldUpdateOperationsInput | number
+  quantidade?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ItemCreateManyPedidoInput = {
@@ -450,8 +554,8 @@ export type ItemCreateManyPedidoInput = {
 }
 
 export type ItemUpdateWithoutPedidoInput = {
-  produtoId?: Prisma.IntFieldUpdateOperationsInput | number
   quantidade?: Prisma.IntFieldUpdateOperationsInput | number
+  produto?: Prisma.ProdutoUpdateOneRequiredWithoutItensNestedInput
 }
 
 export type ItemUncheckedUpdateWithoutPedidoInput = {
@@ -474,6 +578,7 @@ export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   produtoId?: boolean
   quantidade?: boolean
   pedido?: boolean | Prisma.PedidoDefaultArgs<ExtArgs>
+  produto?: boolean | Prisma.ProdutoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["item"]>
 
 
@@ -488,12 +593,14 @@ export type ItemSelectScalar = {
 export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pedidoId" | "produtoId" | "quantidade", ExtArgs["result"]["item"]>
 export type ItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   pedido?: boolean | Prisma.PedidoDefaultArgs<ExtArgs>
+  produto?: boolean | Prisma.ProdutoDefaultArgs<ExtArgs>
 }
 
 export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Item"
   objects: {
     pedido: Prisma.$PedidoPayload<ExtArgs>
+    produto: Prisma.$ProdutoPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -841,6 +948,7 @@ readonly fields: ItemFieldRefs;
 export interface Prisma__ItemClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   pedido<T extends Prisma.PedidoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PedidoDefaultArgs<ExtArgs>>): Prisma.Prisma__PedidoClient<runtime.Types.Result.GetResult<Prisma.$PedidoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  produto<T extends Prisma.ProdutoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProdutoDefaultArgs<ExtArgs>>): Prisma.Prisma__ProdutoClient<runtime.Types.Result.GetResult<Prisma.$ProdutoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

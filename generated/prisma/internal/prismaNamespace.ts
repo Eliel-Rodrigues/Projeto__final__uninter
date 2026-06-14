@@ -882,7 +882,8 @@ export const PedidoScalarFieldEnum = {
   id: 'id',
   canalPedido: 'canalPedido',
   clienteId: 'clienteId',
-  status: 'status'
+  status: 'status',
+  valorTotal: 'valorTotal'
 } as const
 
 export type PedidoScalarFieldEnum = (typeof PedidoScalarFieldEnum)[keyof typeof PedidoScalarFieldEnum]

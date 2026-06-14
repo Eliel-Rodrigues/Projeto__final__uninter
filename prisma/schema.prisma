@@ -48,6 +48,7 @@ model Produto {
   preco     Float
   estoque   Int
   unidadeId Int
+  itens       Item[]
   unidade   Unidade @relation(fields: [unidadeId], references: [id])
 }
 
@@ -55,7 +56,8 @@ model Pedido {
   id          Int         @id @default(autoincrement())
   canalPedido CanalPedido
   clienteId   Int
-  status      String
+  status      String  @default("PENDENTE")
+  valorTotal  Float
   itens       Item[]
   usuario     Usuario     @relation(fields: [clienteId], references: [id])
 }
@@ -66,6 +68,7 @@ model Item {
   produtoId  Int
   quantidade Int
   pedido     Pedido @relation(fields: [pedidoId], references: [id])
+  produto     Produto @relation(fields: [produtoId], references: [id])
 }
 
 model Fidelidade {
