@@ -1,12 +1,15 @@
 import express from "express";
-import { prisma } from "../libs/prisma.js";
+import { criarUnidades, listaUnidades } from "../services/unidades.js";
+import { autenticar, autorizarRoles } from "../services/auth.js";
 
 const unidadeRouter = express.Router();
 
-unidadeRouter.get("/", async (req, res) => {
-  const unidades = await prisma.unidade.findMany({ include: { produtos: true } });
-  res.json(unidades);
+unidadeRouter.post("/", autenticar, autorizarRoles(["ADMIN", "GERENTE"]), async (req, res) => {
+  criarUnidades(req, res);
 });
 
+unidadeRouter.get("/", async (req, res) => {
+  listaUnidades(req, res);
+});
 
 export default unidadeRouter;

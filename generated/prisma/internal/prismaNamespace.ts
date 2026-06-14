@@ -857,7 +857,11 @@ export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeo
 
 export const UnidadeScalarFieldEnum = {
   id: 'id',
-  nome: 'nome'
+  nome: 'nome',
+  endereco: 'endereco',
+  bairro: 'bairro',
+  cidade: 'cidade',
+  cep: 'cep'
 } as const
 
 export type UnidadeScalarFieldEnum = (typeof UnidadeScalarFieldEnum)[keyof typeof UnidadeScalarFieldEnum]
@@ -921,7 +925,10 @@ export type UsuarioOrderByRelevanceFieldEnum = (typeof UsuarioOrderByRelevanceFi
 
 
 export const UnidadeOrderByRelevanceFieldEnum = {
-  nome: 'nome'
+  nome: 'nome',
+  endereco: 'endereco',
+  bairro: 'bairro',
+  cidade: 'cidade'
 } as const
 
 export type UnidadeOrderByRelevanceFieldEnum = (typeof UnidadeOrderByRelevanceFieldEnum)[keyof typeof UnidadeOrderByRelevanceFieldEnum]

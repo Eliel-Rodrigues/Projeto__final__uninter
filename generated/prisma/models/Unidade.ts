@@ -28,50 +28,78 @@ export type AggregateUnidade = {
 
 export type UnidadeAvgAggregateOutputType = {
   id: number | null
+  cep: number | null
 }
 
 export type UnidadeSumAggregateOutputType = {
   id: number | null
+  cep: number | null
 }
 
 export type UnidadeMinAggregateOutputType = {
   id: number | null
   nome: string | null
+  endereco: string | null
+  bairro: string | null
+  cidade: string | null
+  cep: number | null
 }
 
 export type UnidadeMaxAggregateOutputType = {
   id: number | null
   nome: string | null
+  endereco: string | null
+  bairro: string | null
+  cidade: string | null
+  cep: number | null
 }
 
 export type UnidadeCountAggregateOutputType = {
   id: number
   nome: number
+  endereco: number
+  bairro: number
+  cidade: number
+  cep: number
   _all: number
 }
 
 
 export type UnidadeAvgAggregateInputType = {
   id?: true
+  cep?: true
 }
 
 export type UnidadeSumAggregateInputType = {
   id?: true
+  cep?: true
 }
 
 export type UnidadeMinAggregateInputType = {
   id?: true
   nome?: true
+  endereco?: true
+  bairro?: true
+  cidade?: true
+  cep?: true
 }
 
 export type UnidadeMaxAggregateInputType = {
   id?: true
   nome?: true
+  endereco?: true
+  bairro?: true
+  cidade?: true
+  cep?: true
 }
 
 export type UnidadeCountAggregateInputType = {
   id?: true
   nome?: true
+  endereco?: true
+  bairro?: true
+  cidade?: true
+  cep?: true
   _all?: true
 }
 
@@ -164,6 +192,10 @@ export type UnidadeGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type UnidadeGroupByOutputType = {
   id: number
   nome: string
+  endereco: string
+  bairro: string
+  cidade: string
+  cep: number
   _count: UnidadeCountAggregateOutputType | null
   _avg: UnidadeAvgAggregateOutputType | null
   _sum: UnidadeSumAggregateOutputType | null
@@ -192,28 +224,44 @@ export type UnidadeWhereInput = {
   NOT?: Prisma.UnidadeWhereInput | Prisma.UnidadeWhereInput[]
   id?: Prisma.IntFilter<"Unidade"> | number
   nome?: Prisma.StringFilter<"Unidade"> | string
+  endereco?: Prisma.StringFilter<"Unidade"> | string
+  bairro?: Prisma.StringFilter<"Unidade"> | string
+  cidade?: Prisma.StringFilter<"Unidade"> | string
+  cep?: Prisma.IntFilter<"Unidade"> | number
   produtos?: Prisma.ProdutoListRelationFilter
 }
 
 export type UnidadeOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  endereco?: Prisma.SortOrder
+  bairro?: Prisma.SortOrder
+  cidade?: Prisma.SortOrder
+  cep?: Prisma.SortOrder
   produtos?: Prisma.ProdutoOrderByRelationAggregateInput
   _relevance?: Prisma.UnidadeOrderByRelevanceInput
 }
 
 export type UnidadeWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  cep?: number
   AND?: Prisma.UnidadeWhereInput | Prisma.UnidadeWhereInput[]
   OR?: Prisma.UnidadeWhereInput[]
   NOT?: Prisma.UnidadeWhereInput | Prisma.UnidadeWhereInput[]
   nome?: Prisma.StringFilter<"Unidade"> | string
+  endereco?: Prisma.StringFilter<"Unidade"> | string
+  bairro?: Prisma.StringFilter<"Unidade"> | string
+  cidade?: Prisma.StringFilter<"Unidade"> | string
   produtos?: Prisma.ProdutoListRelationFilter
-}, "id">
+}, "id" | "cep">
 
 export type UnidadeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  endereco?: Prisma.SortOrder
+  bairro?: Prisma.SortOrder
+  cidade?: Prisma.SortOrder
+  cep?: Prisma.SortOrder
   _count?: Prisma.UnidadeCountOrderByAggregateInput
   _avg?: Prisma.UnidadeAvgOrderByAggregateInput
   _max?: Prisma.UnidadeMaxOrderByAggregateInput
@@ -227,42 +275,74 @@ export type UnidadeScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UnidadeScalarWhereWithAggregatesInput | Prisma.UnidadeScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Unidade"> | number
   nome?: Prisma.StringWithAggregatesFilter<"Unidade"> | string
+  endereco?: Prisma.StringWithAggregatesFilter<"Unidade"> | string
+  bairro?: Prisma.StringWithAggregatesFilter<"Unidade"> | string
+  cidade?: Prisma.StringWithAggregatesFilter<"Unidade"> | string
+  cep?: Prisma.IntWithAggregatesFilter<"Unidade"> | number
 }
 
 export type UnidadeCreateInput = {
   nome: string
+  endereco: string
+  bairro: string
+  cidade: string
+  cep: number
   produtos?: Prisma.ProdutoCreateNestedManyWithoutUnidadeInput
 }
 
 export type UnidadeUncheckedCreateInput = {
   id?: number
   nome: string
+  endereco: string
+  bairro: string
+  cidade: string
+  cep: number
   produtos?: Prisma.ProdutoUncheckedCreateNestedManyWithoutUnidadeInput
 }
 
 export type UnidadeUpdateInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  bairro?: Prisma.StringFieldUpdateOperationsInput | string
+  cidade?: Prisma.StringFieldUpdateOperationsInput | string
+  cep?: Prisma.IntFieldUpdateOperationsInput | number
   produtos?: Prisma.ProdutoUpdateManyWithoutUnidadeNestedInput
 }
 
 export type UnidadeUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  bairro?: Prisma.StringFieldUpdateOperationsInput | string
+  cidade?: Prisma.StringFieldUpdateOperationsInput | string
+  cep?: Prisma.IntFieldUpdateOperationsInput | number
   produtos?: Prisma.ProdutoUncheckedUpdateManyWithoutUnidadeNestedInput
 }
 
 export type UnidadeCreateManyInput = {
   id?: number
   nome: string
+  endereco: string
+  bairro: string
+  cidade: string
+  cep: number
 }
 
 export type UnidadeUpdateManyMutationInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  bairro?: Prisma.StringFieldUpdateOperationsInput | string
+  cidade?: Prisma.StringFieldUpdateOperationsInput | string
+  cep?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type UnidadeUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  bairro?: Prisma.StringFieldUpdateOperationsInput | string
+  cidade?: Prisma.StringFieldUpdateOperationsInput | string
+  cep?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type UnidadeOrderByRelevanceInput = {
@@ -274,24 +354,38 @@ export type UnidadeOrderByRelevanceInput = {
 export type UnidadeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  endereco?: Prisma.SortOrder
+  bairro?: Prisma.SortOrder
+  cidade?: Prisma.SortOrder
+  cep?: Prisma.SortOrder
 }
 
 export type UnidadeAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  cep?: Prisma.SortOrder
 }
 
 export type UnidadeMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  endereco?: Prisma.SortOrder
+  bairro?: Prisma.SortOrder
+  cidade?: Prisma.SortOrder
+  cep?: Prisma.SortOrder
 }
 
 export type UnidadeMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
+  endereco?: Prisma.SortOrder
+  bairro?: Prisma.SortOrder
+  cidade?: Prisma.SortOrder
+  cep?: Prisma.SortOrder
 }
 
 export type UnidadeSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  cep?: Prisma.SortOrder
 }
 
 export type UnidadeScalarRelationFilter = {
@@ -315,11 +409,19 @@ export type UnidadeUpdateOneRequiredWithoutProdutosNestedInput = {
 
 export type UnidadeCreateWithoutProdutosInput = {
   nome: string
+  endereco: string
+  bairro: string
+  cidade: string
+  cep: number
 }
 
 export type UnidadeUncheckedCreateWithoutProdutosInput = {
   id?: number
   nome: string
+  endereco: string
+  bairro: string
+  cidade: string
+  cep: number
 }
 
 export type UnidadeCreateOrConnectWithoutProdutosInput = {
@@ -340,11 +442,19 @@ export type UnidadeUpdateToOneWithWhereWithoutProdutosInput = {
 
 export type UnidadeUpdateWithoutProdutosInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  bairro?: Prisma.StringFieldUpdateOperationsInput | string
+  cidade?: Prisma.StringFieldUpdateOperationsInput | string
+  cep?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type UnidadeUncheckedUpdateWithoutProdutosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  bairro?: Prisma.StringFieldUpdateOperationsInput | string
+  cidade?: Prisma.StringFieldUpdateOperationsInput | string
+  cep?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -381,6 +491,10 @@ export type UnidadeCountOutputTypeCountProdutosArgs<ExtArgs extends runtime.Type
 export type UnidadeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   nome?: boolean
+  endereco?: boolean
+  bairro?: boolean
+  cidade?: boolean
+  cep?: boolean
   produtos?: boolean | Prisma.Unidade$produtosArgs<ExtArgs>
   _count?: boolean | Prisma.UnidadeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unidade"]>
@@ -390,9 +504,13 @@ export type UnidadeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type UnidadeSelectScalar = {
   id?: boolean
   nome?: boolean
+  endereco?: boolean
+  bairro?: boolean
+  cidade?: boolean
+  cep?: boolean
 }
 
-export type UnidadeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome", ExtArgs["result"]["unidade"]>
+export type UnidadeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "endereco" | "bairro" | "cidade" | "cep", ExtArgs["result"]["unidade"]>
 export type UnidadeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   produtos?: boolean | Prisma.Unidade$produtosArgs<ExtArgs>
   _count?: boolean | Prisma.UnidadeCountOutputTypeDefaultArgs<ExtArgs>
@@ -406,6 +524,10 @@ export type $UnidadePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     nome: string
+    endereco: string
+    bairro: string
+    cidade: string
+    cep: number
   }, ExtArgs["result"]["unidade"]>
   composites: {}
 }
@@ -778,6 +900,10 @@ export interface Prisma__UnidadeClient<T, Null = never, ExtArgs extends runtime.
 export interface UnidadeFieldRefs {
   readonly id: Prisma.FieldRef<"Unidade", 'Int'>
   readonly nome: Prisma.FieldRef<"Unidade", 'String'>
+  readonly endereco: Prisma.FieldRef<"Unidade", 'String'>
+  readonly bairro: Prisma.FieldRef<"Unidade", 'String'>
+  readonly cidade: Prisma.FieldRef<"Unidade", 'String'>
+  readonly cep: Prisma.FieldRef<"Unidade", 'Int'>
 }
     
 

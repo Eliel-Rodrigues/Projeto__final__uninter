@@ -1,34 +1,27 @@
 import express from "express";
-import { prisma } from "../libs/prisma.js";
+import { criarProdutos, listaProdutos, buscarProduto, atualizarProduto, excluirProduto} from "../services/produtos.js";
+import { autenticar, autorizarRoles } from "../services/auth.js";
 
 const produtoRouter = express.Router();
 
-produtoRouter.post("/", async (req, res) => {
-  const produto = await prisma.produto.create({ data: req.body });
-  res.json(produto);
+produtoRouter.post("/", autenticar, autorizarRoles(["GERENTE", "ADMIN"]), async (req, res) => {
+  criarProdutos(req, res);
 });
 
 produtoRouter.get("/", async (req, res) => {
-  const produtos = await prisma.produto.findMany();
-  res.json(produtos);
+  listaProdutos(req, res);
 });
 
 produtoRouter.get("/:id", async (req, res) => {
-  const produto = await prisma.produto.findUnique({ where: { id: Number(req.params.id) } });
-  res.json(produto);
+  buscarProduto(req, res);
 });
 
-produtoRouter.put("/:id", async (req, res) => {
-  const produto = await prisma.produto.update({
-    where: { id: Number(req.params.id) },
-    data: req.body
-  });
-  res.json(produto);
+produtoRouter.put("/:id", autenticar, autorizarRoles(["GERENTE", "ADMIN"]), async (req, res) => {
+  atualizarProduto(req, res);
 });
 
-produtoRouter.delete("/:id", async (req, res) => {
-  await prisma.produto.delete({ where: { id: Number(req.params.id) } });
-  res.json({ mensagem: "Produto removido" });
+produtoRouter.delete("/:id", autenticar, autorizarRoles(["GERENTE", "ADMIN"]), async (req, res) => {
+  excluirProduto(req, res);
 });
 
 export default produtoRouter;

@@ -35,13 +35,16 @@ model Usuario {
 model Unidade {
   id       Int       @id @default(autoincrement())
   nome     String
-  
+  endereco String
+  bairro   String
+  cidade   String
+  cep      Int       @unique
   produtos Produto[]
 }
 
 model Produto {
   id        Int     @id @default(autoincrement())
-  nome      String
+  nome      String 
   preco     Float
   estoque   Int
   unidadeId Int
@@ -49,12 +52,12 @@ model Produto {
 }
 
 model Pedido {
-  id          Int     @id @default(autoincrement())
+  id          Int         @id @default(autoincrement())
   canalPedido CanalPedido
   clienteId   Int
   status      String
   itens       Item[]
-  usuario     Usuario @relation(fields: [clienteId], references: [id])
+  usuario     Usuario     @relation(fields: [clienteId], references: [id])
 }
 
 model Item {
