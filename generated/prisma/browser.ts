@@ -47,3 +47,8 @@ export type Item = Prisma.ItemModel
  * 
  */
 export type Fidelidade = Prisma.FidelidadeModel
+/**
+ * Model Pagamento
+ * 
+ */
+export type Pagamento = Prisma.PagamentoModel

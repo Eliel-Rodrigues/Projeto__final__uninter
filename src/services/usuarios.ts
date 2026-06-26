@@ -13,15 +13,16 @@ export const criarUsuarios = async (req: any, res: any) => {
         nome, 
         email, 
         senha: hash,
-        role 
+        role
       }
     });
-   return res.status(201).json({ id: usuario.id, email: usuario.email, role: usuario.role });
+    return res.status(201).json({ massege: "Usuário criado com sucesso", id: usuario.id, email: usuario.email, role: usuario.role });
   } catch (error) {
-    return res.status(403).json({ erro: "Já existe um usuario com esse email." });
+    return res.status(403).json({ message: "Já existe um usuario com esse email" });
   }
 };
 
+// Perfil do usuário
 export const perfilUsuario = async (req: any, res: any) => {
 
   const usuario = await prisma.usuario.findUnique({
@@ -31,9 +32,8 @@ export const perfilUsuario = async (req: any, res: any) => {
   if (!usuario) {
     return res.status(404).json({ message: "Usuário não encontrado." });
   };
-  return res.json(usuario);
-
-
+  const { senha, ...usuarioSemSenha } = usuario;
+  return res.json( { message: "Usuário encontrado com sucesso", usuarioSemSenha});
 };
 
 

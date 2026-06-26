@@ -389,7 +389,8 @@ export const ModelName = {
   Produto: 'Produto',
   Pedido: 'Pedido',
   Item: 'Item',
-  Fidelidade: 'Fidelidade'
+  Fidelidade: 'Fidelidade',
+  Pagamento: 'Pagamento'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "usuario" | "unidade" | "produto" | "pedido" | "item" | "fidelidade"
+    modelProps: "usuario" | "unidade" | "produto" | "pedido" | "item" | "fidelidade" | "pagamento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -805,6 +806,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Pagamento: {
+      payload: Prisma.$PagamentoPayload<ExtArgs>
+      fields: Prisma.PagamentoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PagamentoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PagamentoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PagamentoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PagamentoPayload>
+        }
+        findFirst: {
+          args: Prisma.PagamentoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PagamentoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PagamentoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PagamentoPayload>
+        }
+        findMany: {
+          args: Prisma.PagamentoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PagamentoPayload>[]
+        }
+        create: {
+          args: Prisma.PagamentoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PagamentoPayload>
+        }
+        createMany: {
+          args: Prisma.PagamentoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.PagamentoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PagamentoPayload>
+        }
+        update: {
+          args: Prisma.PagamentoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PagamentoPayload>
+        }
+        deleteMany: {
+          args: Prisma.PagamentoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PagamentoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.PagamentoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PagamentoPayload>
+        }
+        aggregate: {
+          args: Prisma.PagamentoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePagamento>
+        }
+        groupBy: {
+          args: Prisma.PagamentoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PagamentoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PagamentoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PagamentoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -858,8 +925,6 @@ export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeo
 export const UnidadeScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
-  endereco: 'endereco',
-  bairro: 'bairro',
   cidade: 'cidade',
   cep: 'cep'
 } as const
@@ -908,6 +973,17 @@ export const FidelidadeScalarFieldEnum = {
 export type FidelidadeScalarFieldEnum = (typeof FidelidadeScalarFieldEnum)[keyof typeof FidelidadeScalarFieldEnum]
 
 
+export const PagamentoScalarFieldEnum = {
+  id: 'id',
+  metodo: 'metodo',
+  valor: 'valor',
+  status: 'status',
+  pedidoId: 'pedidoId'
+} as const
+
+export type PagamentoScalarFieldEnum = (typeof PagamentoScalarFieldEnum)[keyof typeof PagamentoScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -927,9 +1003,8 @@ export type UsuarioOrderByRelevanceFieldEnum = (typeof UsuarioOrderByRelevanceFi
 
 export const UnidadeOrderByRelevanceFieldEnum = {
   nome: 'nome',
-  endereco: 'endereco',
-  bairro: 'bairro',
-  cidade: 'cidade'
+  cidade: 'cidade',
+  cep: 'cep'
 } as const
 
 export type UnidadeOrderByRelevanceFieldEnum = (typeof UnidadeOrderByRelevanceFieldEnum)[keyof typeof UnidadeOrderByRelevanceFieldEnum]
@@ -947,6 +1022,13 @@ export const PedidoOrderByRelevanceFieldEnum = {
 } as const
 
 export type PedidoOrderByRelevanceFieldEnum = (typeof PedidoOrderByRelevanceFieldEnum)[keyof typeof PedidoOrderByRelevanceFieldEnum]
+
+
+export const PagamentoOrderByRelevanceFieldEnum = {
+  status: 'status'
+} as const
+
+export type PagamentoOrderByRelevanceFieldEnum = (typeof PagamentoOrderByRelevanceFieldEnum)[keyof typeof PagamentoOrderByRelevanceFieldEnum]
 
 
 
@@ -987,6 +1069,13 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'CanalPedido'
  */
 export type EnumCanalPedidoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CanalPedido'>
+    
+
+
+/**
+ * Reference to a field of type 'Metodo'
+ */
+export type EnumMetodoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Metodo'>
     
 
 /**
@@ -1105,6 +1194,7 @@ export type GlobalOmitConfig = {
   pedido?: Prisma.PedidoOmit
   item?: Prisma.ItemOmit
   fidelidade?: Prisma.FidelidadeOmit
+  pagamento?: Prisma.PagamentoOmit
 }
 
 /* Types for Logging */

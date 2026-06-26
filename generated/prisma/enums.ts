@@ -9,6 +9,15 @@
 * 🟢 You can import this file directly.
 */
 
+export const Metodo = {
+  PIX: 'PIX',
+  CARTAO: 'CARTAO',
+  DINHEIRO: 'DINHEIRO'
+} as const
+
+export type Metodo = (typeof Metodo)[keyof typeof Metodo]
+
+
 export const Role = {
   ADMIN: 'ADMIN',
   GERENTE: 'GERENTE',

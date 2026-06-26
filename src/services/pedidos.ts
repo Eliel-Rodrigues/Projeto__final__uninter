@@ -2,7 +2,7 @@ import { CanalPedido } from "../../generated/prisma/enums.js";
 import { prisma } from "../libs/prisma.js";
 
 
-// Função de regras de negócio
+//  Regras de negócio
 const aplicarRegras = (canal: string, valorBase: number): number => {
   switch (canal) {
     case "APP":
@@ -20,8 +20,9 @@ const aplicarRegras = (canal: string, valorBase: number): number => {
   }
 }
 
-// Função de criação de pedido
+//  Criação de pedido
 export const criarPedido = async (
+  res: any,
   clienteId: number,
   canal: string,
   itens: { produtoId: number; quantidade: number }[]) => {
@@ -33,8 +34,8 @@ export const criarPedido = async (
   let valorBase = 0;
   for (const item of itens) {
     const produto = produtos.find(p => p.id === item.produtoId);
-    if (!produto) throw new Error("Produto não encontrado");
-    if (produto.estoque < item.quantidade) throw new Error("Estoque insuficiente");
+    if (!produto) return res.status(404).json({ message: "Produto não encontrado." });
+    if (produto.estoque < item.quantidade) return res.status(409).json({ message: "Estoque insuficiente " });
 
     valorBase += produto.preco * item.quantidade;
   }
@@ -45,7 +46,6 @@ export const criarPedido = async (
     data: {
       canalPedido: CanalPedido[canal as keyof typeof CanalPedido],
       clienteId,
-      status: "PENDENTE",
       valorTotal: valorFinal,
       itens: {
         create: itens.map(item => ({
@@ -61,15 +61,17 @@ export const criarPedido = async (
 
 };
 
+// Status do pedido
 export const statusPedido = async (req: any, res: any) => {
   const pedido = await prisma.pedido.update({
     where: { id: Number(req.params.id) },
     data: { status: req.body.status }
   });
-  return res.status(201).json(pedido);
+  return res.json({ message: "Status do pedido atualizado com sucesso", pedido });
 };
 
+// Buscar pedidos
 export const buscarPedidos = async (req: any, res: any) => {
   const pedidos = await prisma.pedido.findMany({ include: { itens: true } });
-  return res.status(201).json(pedidos);
+  return res.json({ massege: "Lista de pedidos retornada com sucesso", pedidos });
 };

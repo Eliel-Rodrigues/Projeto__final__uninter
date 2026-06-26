@@ -7,6 +7,12 @@ datasource db {
   provider = "mysql"
 }
 
+enum Metodo {
+  PIX
+  CARTAO
+  DINHEIRO
+}
+
 enum Role {
   ADMIN
   GERENTE
@@ -35,10 +41,8 @@ model Usuario {
 model Unidade {
   id       Int       @id @default(autoincrement())
   nome     String
-  endereco String
-  bairro   String
   cidade   String
-  cep      Int       @unique
+  cep      String      @unique
   produtos Produto[]
 }
 
@@ -56,9 +60,10 @@ model Pedido {
   id          Int         @id @default(autoincrement())
   canalPedido CanalPedido
   clienteId   Int
-  status      String  @default("PENDENTE")
+  status      String  @default("AGUADANDO_PAGAMENTO")
   valorTotal  Float
   itens       Item[]
+  pagamento Pagamento[]
   usuario     Usuario     @relation(fields: [clienteId], references: [id])
 }
 
@@ -76,4 +81,13 @@ model Fidelidade {
   clienteId Int     @unique
   pontos    Int     @default(0)
   usuario   Usuario @relation(fields: [clienteId], references: [id])
+}
+
+model Pagamento {
+  id        Int      @id @default(autoincrement())
+  metodo    Metodo
+  valor     Float
+  status    String   
+  pedidoId  Int     
+  pedido    Pedido   @relation(fields: [pedidoId], references: [id])
 }

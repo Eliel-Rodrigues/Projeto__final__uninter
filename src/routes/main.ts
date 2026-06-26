@@ -9,6 +9,7 @@ import fidelidadeRouter from "./fidelidade.js";
 import pagamentoRouter from "./pagamento.js";
 
 
+
 const mainRouter = express.Router();
 
 mainRouter.use("/usuarios", usuarioRouter);
@@ -19,6 +20,7 @@ mainRouter.use("/unidades", unidadeRouter);
 mainRouter.use("/estoque", estoqueRouter);
 mainRouter.use("/fidelidade", fidelidadeRouter);
 mainRouter.use("/pagamento", pagamentoRouter);
+
 
 
 

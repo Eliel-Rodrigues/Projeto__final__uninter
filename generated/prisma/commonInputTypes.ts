@@ -135,6 +135,23 @@ export type EnumCanalPedidoWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumCanalPedidoFilter<$PrismaModel>
 }
 
+export type EnumMetodoFilter<$PrismaModel = never> = {
+  equals?: $Enums.Metodo | Prisma.EnumMetodoFieldRefInput<$PrismaModel>
+  in?: $Enums.Metodo[]
+  notIn?: $Enums.Metodo[]
+  not?: Prisma.NestedEnumMetodoFilter<$PrismaModel> | $Enums.Metodo
+}
+
+export type EnumMetodoWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.Metodo | Prisma.EnumMetodoFieldRefInput<$PrismaModel>
+  in?: $Enums.Metodo[]
+  notIn?: $Enums.Metodo[]
+  not?: Prisma.NestedEnumMetodoWithAggregatesFilter<$PrismaModel> | $Enums.Metodo
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMetodoFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMetodoFilter<$PrismaModel>
+}
+
 export type NestedIntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[]
@@ -254,6 +271,23 @@ export type NestedEnumCanalPedidoWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCanalPedidoFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCanalPedidoFilter<$PrismaModel>
+}
+
+export type NestedEnumMetodoFilter<$PrismaModel = never> = {
+  equals?: $Enums.Metodo | Prisma.EnumMetodoFieldRefInput<$PrismaModel>
+  in?: $Enums.Metodo[]
+  notIn?: $Enums.Metodo[]
+  not?: Prisma.NestedEnumMetodoFilter<$PrismaModel> | $Enums.Metodo
+}
+
+export type NestedEnumMetodoWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.Metodo | Prisma.EnumMetodoFieldRefInput<$PrismaModel>
+  in?: $Enums.Metodo[]
+  notIn?: $Enums.Metodo[]
+  not?: Prisma.NestedEnumMetodoWithAggregatesFilter<$PrismaModel> | $Enums.Metodo
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMetodoFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMetodoFilter<$PrismaModel>
 }
 
 

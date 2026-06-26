@@ -225,6 +225,7 @@ export type PedidoWhereInput = {
   status?: Prisma.StringFilter<"Pedido"> | string
   valorTotal?: Prisma.FloatFilter<"Pedido"> | number
   itens?: Prisma.ItemListRelationFilter
+  pagamento?: Prisma.PagamentoListRelationFilter
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
 }
 
@@ -235,6 +236,7 @@ export type PedidoOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   valorTotal?: Prisma.SortOrder
   itens?: Prisma.ItemOrderByRelationAggregateInput
+  pagamento?: Prisma.PagamentoOrderByRelationAggregateInput
   usuario?: Prisma.UsuarioOrderByWithRelationInput
   _relevance?: Prisma.PedidoOrderByRelevanceInput
 }
@@ -249,6 +251,7 @@ export type PedidoWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.StringFilter<"Pedido"> | string
   valorTotal?: Prisma.FloatFilter<"Pedido"> | number
   itens?: Prisma.ItemListRelationFilter
+  pagamento?: Prisma.PagamentoListRelationFilter
   usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
 }, "id">
 
@@ -281,6 +284,7 @@ export type PedidoCreateInput = {
   status?: string
   valorTotal: number
   itens?: Prisma.ItemCreateNestedManyWithoutPedidoInput
+  pagamento?: Prisma.PagamentoCreateNestedManyWithoutPedidoInput
   usuario: Prisma.UsuarioCreateNestedOneWithoutPedidosInput
 }
 
@@ -291,6 +295,7 @@ export type PedidoUncheckedCreateInput = {
   status?: string
   valorTotal: number
   itens?: Prisma.ItemUncheckedCreateNestedManyWithoutPedidoInput
+  pagamento?: Prisma.PagamentoUncheckedCreateNestedManyWithoutPedidoInput
 }
 
 export type PedidoUpdateInput = {
@@ -298,6 +303,7 @@ export type PedidoUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   itens?: Prisma.ItemUpdateManyWithoutPedidoNestedInput
+  pagamento?: Prisma.PagamentoUpdateManyWithoutPedidoNestedInput
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutPedidosNestedInput
 }
 
@@ -308,6 +314,7 @@ export type PedidoUncheckedUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   itens?: Prisma.ItemUncheckedUpdateManyWithoutPedidoNestedInput
+  pagamento?: Prisma.PagamentoUncheckedUpdateManyWithoutPedidoNestedInput
 }
 
 export type PedidoCreateManyInput = {
@@ -449,11 +456,26 @@ export type PedidoUpdateOneRequiredWithoutItensNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PedidoUpdateToOneWithWhereWithoutItensInput, Prisma.PedidoUpdateWithoutItensInput>, Prisma.PedidoUncheckedUpdateWithoutItensInput>
 }
 
+export type PedidoCreateNestedOneWithoutPagamentoInput = {
+  create?: Prisma.XOR<Prisma.PedidoCreateWithoutPagamentoInput, Prisma.PedidoUncheckedCreateWithoutPagamentoInput>
+  connectOrCreate?: Prisma.PedidoCreateOrConnectWithoutPagamentoInput
+  connect?: Prisma.PedidoWhereUniqueInput
+}
+
+export type PedidoUpdateOneRequiredWithoutPagamentoNestedInput = {
+  create?: Prisma.XOR<Prisma.PedidoCreateWithoutPagamentoInput, Prisma.PedidoUncheckedCreateWithoutPagamentoInput>
+  connectOrCreate?: Prisma.PedidoCreateOrConnectWithoutPagamentoInput
+  upsert?: Prisma.PedidoUpsertWithoutPagamentoInput
+  connect?: Prisma.PedidoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PedidoUpdateToOneWithWhereWithoutPagamentoInput, Prisma.PedidoUpdateWithoutPagamentoInput>, Prisma.PedidoUncheckedUpdateWithoutPagamentoInput>
+}
+
 export type PedidoCreateWithoutUsuarioInput = {
   canalPedido: $Enums.CanalPedido
   status?: string
   valorTotal: number
   itens?: Prisma.ItemCreateNestedManyWithoutPedidoInput
+  pagamento?: Prisma.PagamentoCreateNestedManyWithoutPedidoInput
 }
 
 export type PedidoUncheckedCreateWithoutUsuarioInput = {
@@ -462,6 +484,7 @@ export type PedidoUncheckedCreateWithoutUsuarioInput = {
   status?: string
   valorTotal: number
   itens?: Prisma.ItemUncheckedCreateNestedManyWithoutPedidoInput
+  pagamento?: Prisma.PagamentoUncheckedCreateNestedManyWithoutPedidoInput
 }
 
 export type PedidoCreateOrConnectWithoutUsuarioInput = {
@@ -505,6 +528,7 @@ export type PedidoCreateWithoutItensInput = {
   canalPedido: $Enums.CanalPedido
   status?: string
   valorTotal: number
+  pagamento?: Prisma.PagamentoCreateNestedManyWithoutPedidoInput
   usuario: Prisma.UsuarioCreateNestedOneWithoutPedidosInput
 }
 
@@ -514,6 +538,7 @@ export type PedidoUncheckedCreateWithoutItensInput = {
   clienteId: number
   status?: string
   valorTotal: number
+  pagamento?: Prisma.PagamentoUncheckedCreateNestedManyWithoutPedidoInput
 }
 
 export type PedidoCreateOrConnectWithoutItensInput = {
@@ -536,6 +561,7 @@ export type PedidoUpdateWithoutItensInput = {
   canalPedido?: Prisma.EnumCanalPedidoFieldUpdateOperationsInput | $Enums.CanalPedido
   status?: Prisma.StringFieldUpdateOperationsInput | string
   valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  pagamento?: Prisma.PagamentoUpdateManyWithoutPedidoNestedInput
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutPedidosNestedInput
 }
 
@@ -545,6 +571,57 @@ export type PedidoUncheckedUpdateWithoutItensInput = {
   clienteId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  pagamento?: Prisma.PagamentoUncheckedUpdateManyWithoutPedidoNestedInput
+}
+
+export type PedidoCreateWithoutPagamentoInput = {
+  canalPedido: $Enums.CanalPedido
+  status?: string
+  valorTotal: number
+  itens?: Prisma.ItemCreateNestedManyWithoutPedidoInput
+  usuario: Prisma.UsuarioCreateNestedOneWithoutPedidosInput
+}
+
+export type PedidoUncheckedCreateWithoutPagamentoInput = {
+  id?: number
+  canalPedido: $Enums.CanalPedido
+  clienteId: number
+  status?: string
+  valorTotal: number
+  itens?: Prisma.ItemUncheckedCreateNestedManyWithoutPedidoInput
+}
+
+export type PedidoCreateOrConnectWithoutPagamentoInput = {
+  where: Prisma.PedidoWhereUniqueInput
+  create: Prisma.XOR<Prisma.PedidoCreateWithoutPagamentoInput, Prisma.PedidoUncheckedCreateWithoutPagamentoInput>
+}
+
+export type PedidoUpsertWithoutPagamentoInput = {
+  update: Prisma.XOR<Prisma.PedidoUpdateWithoutPagamentoInput, Prisma.PedidoUncheckedUpdateWithoutPagamentoInput>
+  create: Prisma.XOR<Prisma.PedidoCreateWithoutPagamentoInput, Prisma.PedidoUncheckedCreateWithoutPagamentoInput>
+  where?: Prisma.PedidoWhereInput
+}
+
+export type PedidoUpdateToOneWithWhereWithoutPagamentoInput = {
+  where?: Prisma.PedidoWhereInput
+  data: Prisma.XOR<Prisma.PedidoUpdateWithoutPagamentoInput, Prisma.PedidoUncheckedUpdateWithoutPagamentoInput>
+}
+
+export type PedidoUpdateWithoutPagamentoInput = {
+  canalPedido?: Prisma.EnumCanalPedidoFieldUpdateOperationsInput | $Enums.CanalPedido
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  itens?: Prisma.ItemUpdateManyWithoutPedidoNestedInput
+  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutPedidosNestedInput
+}
+
+export type PedidoUncheckedUpdateWithoutPagamentoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  canalPedido?: Prisma.EnumCanalPedidoFieldUpdateOperationsInput | $Enums.CanalPedido
+  clienteId?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  itens?: Prisma.ItemUncheckedUpdateManyWithoutPedidoNestedInput
 }
 
 export type PedidoCreateManyUsuarioInput = {
@@ -559,6 +636,7 @@ export type PedidoUpdateWithoutUsuarioInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   itens?: Prisma.ItemUpdateManyWithoutPedidoNestedInput
+  pagamento?: Prisma.PagamentoUpdateManyWithoutPedidoNestedInput
 }
 
 export type PedidoUncheckedUpdateWithoutUsuarioInput = {
@@ -567,6 +645,7 @@ export type PedidoUncheckedUpdateWithoutUsuarioInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   valorTotal?: Prisma.FloatFieldUpdateOperationsInput | number
   itens?: Prisma.ItemUncheckedUpdateManyWithoutPedidoNestedInput
+  pagamento?: Prisma.PagamentoUncheckedUpdateManyWithoutPedidoNestedInput
 }
 
 export type PedidoUncheckedUpdateManyWithoutUsuarioInput = {
@@ -583,10 +662,12 @@ export type PedidoUncheckedUpdateManyWithoutUsuarioInput = {
 
 export type PedidoCountOutputType = {
   itens: number
+  pagamento: number
 }
 
 export type PedidoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   itens?: boolean | PedidoCountOutputTypeCountItensArgs
+  pagamento?: boolean | PedidoCountOutputTypeCountPagamentoArgs
 }
 
 /**
@@ -606,6 +687,13 @@ export type PedidoCountOutputTypeCountItensArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.ItemWhereInput
 }
 
+/**
+ * PedidoCountOutputType without action
+ */
+export type PedidoCountOutputTypeCountPagamentoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PagamentoWhereInput
+}
+
 
 export type PedidoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -614,6 +702,7 @@ export type PedidoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   status?: boolean
   valorTotal?: boolean
   itens?: boolean | Prisma.Pedido$itensArgs<ExtArgs>
+  pagamento?: boolean | Prisma.Pedido$pagamentoArgs<ExtArgs>
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.PedidoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pedido"]>
@@ -631,6 +720,7 @@ export type PedidoSelectScalar = {
 export type PedidoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "canalPedido" | "clienteId" | "status" | "valorTotal", ExtArgs["result"]["pedido"]>
 export type PedidoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   itens?: boolean | Prisma.Pedido$itensArgs<ExtArgs>
+  pagamento?: boolean | Prisma.Pedido$pagamentoArgs<ExtArgs>
   usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.PedidoCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -639,6 +729,7 @@ export type $PedidoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Pedido"
   objects: {
     itens: Prisma.$ItemPayload<ExtArgs>[]
+    pagamento: Prisma.$PagamentoPayload<ExtArgs>[]
     usuario: Prisma.$UsuarioPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -988,6 +1079,7 @@ readonly fields: PedidoFieldRefs;
 export interface Prisma__PedidoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   itens<T extends Prisma.Pedido$itensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Pedido$itensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pagamento<T extends Prisma.Pedido$pagamentoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Pedido$pagamentoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PagamentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   usuario<T extends Prisma.UsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__UsuarioClient<runtime.Types.Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1392,6 +1484,30 @@ export type Pedido$itensArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.ItemScalarFieldEnum | Prisma.ItemScalarFieldEnum[]
+}
+
+/**
+ * Pedido.pagamento
+ */
+export type Pedido$pagamentoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Pagamento
+   */
+  select?: Prisma.PagamentoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Pagamento
+   */
+  omit?: Prisma.PagamentoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PagamentoInclude<ExtArgs> | null
+  where?: Prisma.PagamentoWhereInput
+  orderBy?: Prisma.PagamentoOrderByWithRelationInput | Prisma.PagamentoOrderByWithRelationInput[]
+  cursor?: Prisma.PagamentoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PagamentoScalarFieldEnum | Prisma.PagamentoScalarFieldEnum[]
 }
 
 /**

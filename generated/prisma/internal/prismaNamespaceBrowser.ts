@@ -56,7 +56,8 @@ export const ModelName = {
   Produto: 'Produto',
   Pedido: 'Pedido',
   Item: 'Item',
-  Fidelidade: 'Fidelidade'
+  Fidelidade: 'Fidelidade',
+  Pagamento: 'Pagamento'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -89,8 +90,6 @@ export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeo
 export const UnidadeScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
-  endereco: 'endereco',
-  bairro: 'bairro',
   cidade: 'cidade',
   cep: 'cep'
 } as const
@@ -139,6 +138,17 @@ export const FidelidadeScalarFieldEnum = {
 export type FidelidadeScalarFieldEnum = (typeof FidelidadeScalarFieldEnum)[keyof typeof FidelidadeScalarFieldEnum]
 
 
+export const PagamentoScalarFieldEnum = {
+  id: 'id',
+  metodo: 'metodo',
+  valor: 'valor',
+  status: 'status',
+  pedidoId: 'pedidoId'
+} as const
+
+export type PagamentoScalarFieldEnum = (typeof PagamentoScalarFieldEnum)[keyof typeof PagamentoScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -158,9 +168,8 @@ export type UsuarioOrderByRelevanceFieldEnum = (typeof UsuarioOrderByRelevanceFi
 
 export const UnidadeOrderByRelevanceFieldEnum = {
   nome: 'nome',
-  endereco: 'endereco',
-  bairro: 'bairro',
-  cidade: 'cidade'
+  cidade: 'cidade',
+  cep: 'cep'
 } as const
 
 export type UnidadeOrderByRelevanceFieldEnum = (typeof UnidadeOrderByRelevanceFieldEnum)[keyof typeof UnidadeOrderByRelevanceFieldEnum]
@@ -178,4 +187,11 @@ export const PedidoOrderByRelevanceFieldEnum = {
 } as const
 
 export type PedidoOrderByRelevanceFieldEnum = (typeof PedidoOrderByRelevanceFieldEnum)[keyof typeof PedidoOrderByRelevanceFieldEnum]
+
+
+export const PagamentoOrderByRelevanceFieldEnum = {
+  status: 'status'
+} as const
+
+export type PagamentoOrderByRelevanceFieldEnum = (typeof PagamentoOrderByRelevanceFieldEnum)[keyof typeof PagamentoOrderByRelevanceFieldEnum]
 

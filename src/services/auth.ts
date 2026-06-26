@@ -20,7 +20,7 @@ export const gerarToken = async (req: any, res: any) => {
     process.env.JWT_SECRET as string,
     { expiresIn: "1h" }
   );
-  res.json({ accessToken: token });
+  return res.status(201).json({ message: "Token JWT gerado com sucesso",  accessToken: token });
 }
 
 // Middleware de autenticação
@@ -28,14 +28,13 @@ export function autenticar(req: any, res: any, next: any) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 
-  if (!token) return res.status(401).json({ erro: "Token não fornecido" });
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET as string);
     req.usuario = payload;
     next();
   } catch (err) {
     console.error("Erro ao verificar token:", err);
-    return res.status(403).json({ erro: "Token inválido ou expirado" });
+    return res.status(401).json({ message: "Não autorizado (token inválido ou ausente)" });
   };
 };
 

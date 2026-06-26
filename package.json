@@ -97,6 +97,8 @@
     "side-channel-map": "^1.0.1",
     "side-channel-weakmap": "^1.0.2",
     "statuses": "^2.0.2",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1",
     "tinyexec": "^1.2.2",
     "toidentifier": "^1.0.1",
     "type-is": "^2.1.0",
@@ -106,11 +108,14 @@
     "wrappy": "^1.0.2"
   },
   "devDependencies": {
+    "@types/axios": "^0.9.36",
     "@types/bcrypt": "^6.0.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.9.1",
+    "@types/swagger-ui-express": "^4.1.8",
+    "axios": "^1.18.0",
     "bcrypt": "^6.0.0",
     "dotenv": "^17.4.2",
     "jsonwebtoken": "^9.0.3",
@@ -120,6 +125,7 @@
     "typescript": "^6.0.3"
   },
   "scripts": {
+    "seed": "tsx ./src/seed.ts",
     "dev": "node --env-file=.env --import=tsx --watch ./src/server.ts"
   },
   "repository": {
