@@ -8,7 +8,7 @@ const unidadeRouter = express.Router();
  * @swagger
  * /unidades:
  *   post:
- *     summary: Cria uma nova unidade (GERENTE, ADMIN)
+ *     summary: Cria uma nova unidade (apenas ADMIN)
  *     security:
  *       - bearerAuth: []   # exige token JWT
  *     requestBody:

@@ -8,7 +8,7 @@ const produtoRouter = express.Router();
  * @swagger
  * /produtos:
  *   post:
- *     summary: Cria um novo produto (apenas GERENTE ou ADMIN)
+ *     summary: Cria um novo produto (apenas ADMIN)
  *     security:
  *       - bearerAuth: []   # exige token JWT
  *     requestBody:
@@ -60,7 +60,7 @@ const produtoRouter = express.Router();
  *       403:
  *         description: Acesso negado (role insuficiente)
  */
-produtoRouter.post("/", autenticar, autorizarRoles(["GERENTE", "ADMIN"]), async (req, res) => {
+produtoRouter.post("/", autenticar, autorizarRoles(["ADMIN"]), async (req, res) => {
   criarProdutos(req, res);
 });
 
@@ -95,7 +95,7 @@ produtoRouter.post("/", autenticar, autorizarRoles(["GERENTE", "ADMIN"]), async 
  *                   unidadeId:
  *                     type: number                   
  */
-produtoRouter.get("/", async (req, res) => {
+produtoRouter.get("/", autenticar, async (req, res) => {
   listaProdutos(req, res);
 });
 
@@ -134,7 +134,7 @@ produtoRouter.get("/", async (req, res) => {
  *       404:
  *         description: Produto não encontrado
  */
-produtoRouter.get("/:id", async (req, res) => {
+produtoRouter.get("/:id", autenticar, async (req, res) => {
   buscarProduto(req, res);
 });
 
@@ -142,7 +142,7 @@ produtoRouter.get("/:id", async (req, res) => {
  * @swagger
  * /produtos/{id}:
  *   put:
- *     summary: Atualiza um produto existente (apenas GERENTE ou ADMIN)
+ *     summary: Atualiza um produto existente (apenas ADMIN)
  *     security:
  *       - bearerAuth: []   # exige token JWT
  *     parameters:
@@ -191,7 +191,7 @@ produtoRouter.get("/:id", async (req, res) => {
  *       404:
  *         description: Produto não encontrado
  */
-produtoRouter.put("/:id", autenticar, autorizarRoles(["GERENTE", "ADMIN"]), async (req, res) => {
+produtoRouter.put("/:id", autenticar, autorizarRoles(["ADMIN"]), async (req, res) => {
   atualizarProduto(req, res);
 });
 
@@ -199,7 +199,7 @@ produtoRouter.put("/:id", autenticar, autorizarRoles(["GERENTE", "ADMIN"]), asyn
  * @swagger
  * /produtos/{id}:
  *   delete:
- *     summary: Exclui um produto existente (apenas GERENTE ou ADMIN)
+ *     summary: Exclui um produto existente (apenas ADMIN)
  *     security:
  *       - bearerAuth: []   # exige token JWT
  *     parameters:
@@ -219,7 +219,7 @@ produtoRouter.put("/:id", autenticar, autorizarRoles(["GERENTE", "ADMIN"]), asyn
  *       404:
  *         description: Produto não encontrado
  */
-produtoRouter.delete("/:id", autenticar, autorizarRoles(["GERENTE", "ADMIN"]), async (req, res) => {
+produtoRouter.delete("/:id", autenticar, autorizarRoles(["ADMIN"]), async (req, res) => {
   excluirProduto(req, res);
 });
 

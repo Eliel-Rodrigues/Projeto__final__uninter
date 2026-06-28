@@ -8,7 +8,7 @@ const estoqueRouter = express.Router();
  * @swagger
  * /estoque/entrada/{id}:
  *   post:
- *     summary: Registra entrada de estoque para um produto (GERENTE, ADMIN)
+ *     summary: Registra entrada de estoque para um produto (apenas GERENTE, ADMIN)
  *     security:
  *       - bearerAuth: []   # exige token JWT
  *     parameters:
@@ -65,7 +65,7 @@ estoqueRouter.post("/entrada/:id", autenticar, autorizarRoles(["GERENTE", "ADMIN
  * @swagger
  * /estoque/saida/{id}:
  *   post:
- *     summary: Registra saída de estoque para um produto (GERENTE, ADMIN ou ATENDENTE)
+ *     summary: Registra saída de estoque para um produto (apenas GERENTE, ADMIN ou ATENDENTE)
  *     security:
  *       - bearerAuth: []   # exige token JWT
  *     parameters:
@@ -125,7 +125,7 @@ estoqueRouter.post("/saida/:id", autenticar, autorizarRoles(["GERENTE", "ADMIN",
  * @swagger
  * /estoque:
  *   get:
- *     summary: Consulta estoque de todos os produtos (GERENTE, ADMIN ou ATENDENTE)
+ *     summary: Consulta estoque de todos os produtos (apenas GERENTE, ADMIN ou ATENDENTE)
  *     security:
  *       - bearerAuth: []   # exige token JWT
  *     responses:
@@ -166,7 +166,7 @@ estoqueRouter.get("/", autenticar, autorizarRoles(["GERENTE", "ADMIN", "ATENDENT
  * @swagger
  * /estoque/unidades/{id}:
  *   get:
- *     summary: Consulta estoque de produtos de uma unidade específica (GERENTE, ADMIN ou ATENDENTE)
+ *     summary: Consulta estoque de produtos de uma unidade específica (apenas GERENTE, ADMIN ou ATENDENTE)
  *     security:
  *       - bearerAuth: []   # exige token JWT
  *     parameters:
