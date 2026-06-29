@@ -11,6 +11,7 @@ const unidadeRouter = express.Router();
  *     summary: Cria uma nova unidade (apenas ADMIN)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Unidades]
  *     requestBody:
  *       required: true
  *       content:
@@ -57,6 +58,7 @@ unidadeRouter.post("/", autenticar, autorizarRoles(["ADMIN"]), async (req, res) 
  *     summary: Lista todas as unidades (Usuário precisa está logado)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Unidades]
  *     responses:
  *       200:
  *         description: Lista de unidades retornada com sucesso
@@ -90,6 +92,7 @@ unidadeRouter.get("/", autenticar, async (req, res) => {
  *     summary: Busca uma unidade pelo ID (Usuário precisa está logado)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Unidades]
  *     parameters:
  *       - in: path
  *         name: id

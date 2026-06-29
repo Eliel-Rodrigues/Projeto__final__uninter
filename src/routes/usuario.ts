@@ -9,6 +9,7 @@ const usuarioRouter = express.Router();
  * /usuarios:
  *   post:
  *     summary: Cria um novo usuário (Frontend só libera o campo role pro ADMIN ou GERENTE)
+ *     tags: [Usuários]
  *     requestBody:
  *       required: true
  *       content:
@@ -41,7 +42,7 @@ const usuarioRouter = express.Router();
  *                 role:
  *                   type: string          
  *       403:
- *         description: Já existe um usuario com esse email
+ *         description: Usuário não foi criado, tente novamente
  */
 
 usuarioRouter.post("/", async (req, res) => {
@@ -55,6 +56,7 @@ usuarioRouter.post("/", async (req, res) => {
  *     summary: Busca um perfil usuário pelo ID (Usuário precisa está logado)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Usuários]
  *     parameters:
  *       - in: path
  *         name: id

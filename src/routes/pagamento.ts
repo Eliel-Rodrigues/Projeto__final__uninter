@@ -11,6 +11,7 @@ const pagamentoRouter = express.Router();
  *     summary: Realiza o pagamento de um pedido (mock) (Usuário precisa está logado)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Pagamento]
  *     parameters:
  *       - in: path
  *         name: id
@@ -68,6 +69,7 @@ pagamentoRouter.post("/mock/:id", autenticar, async (req, res) => {
  *     summary: Retorna o comprovante de pagamento de um pedido (Usuário precisa está logado)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Pagamento]
  *     parameters:
  *       - in: path
  *         name: id

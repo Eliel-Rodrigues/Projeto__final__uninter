@@ -56,7 +56,7 @@ console.log('Seed concluído com sucesso!');
   await prisma.produto.createMany({
     data: [
       {
-        nome: 'Fejoada',
+        nome: 'Hambúrguer Nortestino',
         preco: 25,
         estoque: 100,
         unidadeId: 1

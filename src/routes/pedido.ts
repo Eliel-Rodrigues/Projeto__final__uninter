@@ -1,5 +1,5 @@
 import express from "express";
-import { buscarPedidos, criarPedido, statusPedido } from "../services/pedidos.js";
+import { criarPedido, listaPedidos, statusPedido } from "../services/pedidos.js";
 import { autenticar, autorizarRoles } from "../services/auth.js";
 
 const pedidoRouter = express.Router();
@@ -11,6 +11,7 @@ const pedidoRouter = express.Router();
  *     summary: Cria um novo pedido (Usuário precisa está logado)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Pedidos]
  *     requestBody:
  *       required: true
  *       content:
@@ -85,11 +86,12 @@ pedidoRouter.post("/", autenticar, async (req, res) => {
 
 /**
  * @swagger
- * /pedidos/{id}/status:
+ * /pedidos/{id}:
  *   put:
  *     summary: Atualiza o status de um pedido (GERENTE, ADMIN ou ATENDENTE)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Pedidos]
  *     parameters:
  *       - in: path
  *         name: id
@@ -133,7 +135,7 @@ pedidoRouter.post("/", autenticar, async (req, res) => {
  *       404:
  *         description: Pedido não encontrado
  */
-pedidoRouter.put("/:id/status", autenticar, autorizarRoles(["GERENTE", "ADMIN", "ATENDENTE"]), async (req, res) => {
+pedidoRouter.put("/:id", autenticar, autorizarRoles(["GERENTE", "ADMIN", "ATENDENTE"]), async (req, res) => {
   statusPedido(req, res);
 });
 
@@ -141,9 +143,23 @@ pedidoRouter.put("/:id/status", autenticar, autorizarRoles(["GERENTE", "ADMIN", 
  * @swagger
  * /pedidos:
  *   get:
- *     summary: Lista todos os pedidos (Usuário precisa está logado)
+ *     summary: Lista pedidos filtrados por canal e status
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Pedidos]
+ *     parameters:
+ *       - in: query
+ *         name: canalPedido
+ *         schema:
+ *           type: string
+ *           enum: [ APP, TOTEM, BALCAO, PICKUP, WEB]
+ *         description: Canal do pedido
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *           enum: [AGUADANDO_PAGAMENTO, PAGO, RECUSADO]
+ *         description: Status do pedido
  *     responses:
  *       200:
  *         description: Lista de pedidos retornada com sucesso
@@ -163,24 +179,25 @@ pedidoRouter.put("/:id/status", autenticar, autorizarRoles(["GERENTE", "ADMIN", 
  *                   status:
  *                     type: string
  *                   valorTotal:
- *                      type: number
- *                      format: float
- *                   itens:
- *                     type: array
- *                     items:
- *                       type: object
- *                       properties:
- *                         id:
- *                           type: integer
- *                         produtoId:
- *                           type: integer
- *                         pedidoId:
- *                           type: integer
- *                         quantidade:
- *                           type: integer
+ *                     type: number
+ *                     format: float
+ *             example:
+ *                 pedidos:
+ *                   - id: 1
+ *                     produtoId: 69
+ *                     pedidoId: 101
+ *                     quantidade: 2
+ *                   - id: 2
+ *                     produtoId: 70
+ *                     pedidoId: 101
+ *                     quantidade: 1
  */
+
+
+
 pedidoRouter.get("/", autenticar, async (req, res) => {
-  buscarPedidos(req, res);
+  listaPedidos(req, res);
 });
 
 export default pedidoRouter;
+

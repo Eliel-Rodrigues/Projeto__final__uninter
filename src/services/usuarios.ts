@@ -18,7 +18,7 @@ export const criarUsuarios = async (req: any, res: any) => {
     });
     return res.status(201).json({ massege: "Usuário criado com sucesso", id: usuario.id, nome: usuario.nome, email: usuario.email, role: usuario.role });
   } catch (error) {
-    return res.status(403).json({ message: "Já existe um usuario com esse email" });
+    return res.status(403).json({ message: "Usuário não foi criado, tente novamente" });
   }
 };
 

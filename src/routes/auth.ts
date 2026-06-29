@@ -12,6 +12,7 @@ const authRouter = express.Router();
  * /login:
  *   post:
  *     summary: Autenticação de usuário e geração de token JWT
+ *     tags: [Auth]
  *     requestBody:
  *       required: true
  *       content:

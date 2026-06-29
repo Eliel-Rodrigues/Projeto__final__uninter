@@ -7,16 +7,40 @@ export const criarProdutos = async (req: any, res: any) => {
   return res.status(201).json({ massage: "Produto criado com sucesso", produto});
 };
 
-// Lista produtos
+// Lista produtos paginados
 export const listaProdutos = async (req: any, res: any) => {
-  const produtos = await prisma.produto.findMany();
-  if(!produtos){
-    return res.status(404).json({ message: "Lista de produtos está vazia."});
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+    // Busca paginada
+    const produtos = await prisma.produto.findMany({
+      skip,
+      take: limit,
+    });
+
+    // Conta total de registros
+    const totalItems = await prisma.produto.count();
+    const totalPages = Math.ceil(totalItems / limit);
+
+    res.json({
+      message: "Lista de produtos paginada",
+      data: produtos,
+      pagination: {
+        page,
+        limit,
+        total_items: totalItems,
+        total_pages: totalPages,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Erro ao buscar produtos" });
   }
-  return res.json(produtos);
 };
 
-// BUscar produto por id
+// Buscar produto por id
 export const buscarProduto = async (req: any, res: any) => {
   const produto = await prisma.produto.findUnique({ where: { id: Number(req.params.id) } });
   if(!produto){

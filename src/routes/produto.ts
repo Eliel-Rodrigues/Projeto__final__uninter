@@ -11,6 +11,7 @@ const produtoRouter = express.Router();
  *     summary: Cria um novo produto (apenas ADMIN)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Produtos]
  *     requestBody:
  *       required: true
  *       content:
@@ -68,33 +69,64 @@ produtoRouter.post("/", autenticar, autorizarRoles(["ADMIN"]), async (req, res) 
  * @swagger
  * /produtos:
  *   get:
- *     summary: Lista todos os produtos (Usuário precisa está logado)
+ *     summary: Lista produtos com paginação (Usuário precisa está logado)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Produtos]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Número da página
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Quantidade de itens por página
  *     responses:
  *       200:
- *         description: Lista de produtos
+ *         description: Lista de produtos paginada
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 produdo:
- *                   type:"object"
- *                 properties:
- *                   id:
- *                     type: integer
- *                   nome:
- *                     type: string
- *                   estoque:
- *                     type: number
- *                   preco:
- *                     type: number
- *                     format: float
- *                   unidadeId:
- *                     type: number                   
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       nome:
+ *                         type: string
+ *                       preco:
+ *                         type: number
+ *                         format: float
+ *                       estoque:
+ *                         type: integer
+ *                       unidadeId:
+ *                         type: integer
+ *                 pagination:
+ *                   type: object
+ *                   properties:
+ *                     page:
+ *                       type: integer
+ *                     limit:
+ *                       type: integer
+ *                     total_items:
+ *                       type: integer
+ *                     total_pages:
+ *                       type: integer
+ *       500:
+ *         description: Erro ao buscar produtos
  */
+
+
+
 produtoRouter.get("/", autenticar, async (req, res) => {
   listaProdutos(req, res);
 });
@@ -106,6 +138,7 @@ produtoRouter.get("/", autenticar, async (req, res) => {
  *     summary: Busca um produto pelo ID (Usuário precisa está logado)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Produtos]
  *     parameters:
  *       - in: path
  *         name: id
@@ -145,6 +178,7 @@ produtoRouter.get("/:id", autenticar, async (req, res) => {
  *     summary: Atualiza um produto existente (apenas ADMIN)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Produtos]
  *     parameters:
  *       - in: path
  *         name: id
@@ -202,6 +236,7 @@ produtoRouter.put("/:id", autenticar, autorizarRoles(["ADMIN"]), async (req, res
  *     summary: Exclui um produto existente (apenas ADMIN)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Produtos]
  *     parameters:
  *       - in: path
  *         name: id
@@ -224,3 +259,7 @@ produtoRouter.delete("/:id", autenticar, autorizarRoles(["ADMIN"]), async (req, 
 });
 
 export default produtoRouter;
+
+
+
+

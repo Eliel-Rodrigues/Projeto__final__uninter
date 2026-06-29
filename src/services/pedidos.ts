@@ -26,7 +26,11 @@ export const criarPedido = async (
   clienteId: number,
   canal: string,
   itens: { produtoId: number; quantidade: number }[]) => {
-
+  
+  const cliente = await prisma.usuario.findUnique({ where: { id: Number(clienteId) } });
+  if (!cliente){
+    return res.status(404).json({ message: "Usuário não existe " })
+  }
   const produtos = await prisma.produto.findMany({
     where: { id: { in: itens.map(i => i.produtoId) } }
   });
@@ -61,17 +65,36 @@ export const criarPedido = async (
 
 };
 
-// Status do pedido
+// Atualizar status do pedido
 export const statusPedido = async (req: any, res: any) => {
-  const pedido = await prisma.pedido.update({
+  try {
+    const pedido = await prisma.pedido.update({
     where: { id: Number(req.params.id) },
     data: { status: req.body.status }
-  });
-  return res.json({ message: "Status do pedido atualizado com sucesso", pedido });
+    });
+    return res.json({ message: "Status do pedido atualizado com sucesso", pedido });
+  } catch (error) {
+    return res.status(404).json({ message: "Pedido não encontrado."});
+  };
 };
 
-// Buscar pedidos
-export const buscarPedidos = async (req: any, res: any) => {
-  const pedidos = await prisma.pedido.findMany({ include: { itens: true } });
-  return res.json({ massege: "Lista de pedidos retornada com sucesso", pedidos });
+// Lista pedidos por CanalPedido e status
+export const listaPedidos = async (req: any, res: any) => {
+ try {
+    const canalPedido = req.query.canalPedido;
+    const status = req.query.status;
+
+    const pedidos = await prisma.pedido.findMany({
+      where: {
+        canalPedido: canalPedido ? CanalPedido[canalPedido as keyof typeof CanalPedido] : undefined,
+        status: status ? String(status) : undefined,
+      },
+    });
+
+    res.json({ message: "Lista de pedidos retornada com sucesso",pedidos});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Erro ao buscar pedidos" });
+  }
 };
+

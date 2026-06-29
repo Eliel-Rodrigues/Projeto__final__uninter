@@ -11,6 +11,7 @@ const fidelidadeRouter = express.Router();
  *     summary: Consulta saldo de pontos de fidelidade de um cliente (Usuário precisa está logado)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Fidelidade]
  *     parameters:
  *       - in: path
  *         name: clienteId
@@ -46,6 +47,7 @@ fidelidadeRouter.get("/pontos/:clienteId", autenticar,  async (req, res) => {
  *     summary: Adiciona pontos de fidelidade a um cliente  (GERENTE, ATENDENTE)
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Fidelidade]
  *     parameters:
  *       - in: path
  *         name: clienteId
@@ -98,6 +100,7 @@ fidelidadeRouter.post("/adicionar/:clienteId", autenticar, autorizarRoles(["GERE
  *     summary: Resgata pontos de fidelidade de um cliente (CLIENTE) 
  *     security:
  *       - bearerAuth: []   # exige token JWT
+ *     tags: [Fidelidade]
  *     parameters:
  *       - in: path
  *         name: clienteId
