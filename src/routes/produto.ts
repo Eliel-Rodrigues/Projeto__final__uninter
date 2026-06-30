@@ -60,6 +60,8 @@ const produtoRouter = express.Router();
  *         description: Não autorizado (token inválido ou ausente)
  *       403:
  *         description: Acesso negado (role insuficiente)
+ *       404:
+ *         description: Unidade não encontra
  */
 produtoRouter.post("/", autenticar, autorizarRoles(["ADMIN"]), async (req, res) => {
   criarProdutos(req, res);

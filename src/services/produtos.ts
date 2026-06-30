@@ -2,7 +2,10 @@ import { prisma } from "../libs/prisma.js";
 
 // Criar produtos
 export const criarProdutos = async (req: any, res: any) => {
-  
+  const  unidadeId = req.body.unidadeId
+  const unidade = await prisma.unidade.findUnique({ where: { id: Number(unidadeId) }});
+  if(!unidade) return res.status(404).json({ massage: "Unidade não encontra"});
+
   const produto = await prisma.produto.create({ data: req.body});
   return res.status(201).json({ massage: "Produto criado com sucesso", produto});
 };
